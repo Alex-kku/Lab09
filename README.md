@@ -270,7 +270,6 @@ $ gist REPORT.md
 1)
 
 2)
-
 $ mkdir homework02
 $ cd homework02
 $ subl README.md
@@ -314,11 +313,52 @@ $ git add .
 5)
 $ git commit -m"Aadded hello_world.cpp"
 [master 4d3e1d8] Aadded hello_world.cpp
- 2 files changed, 9 insertions(+)
- create mode 100644 hello_world.cpp/.hello_world.cpp.swp
+ 1 file changed, 9 insertions(+)
  create mode 100644 hello_world.cpp/hello_world.cpp
 
 6)
+
+7)
+$ git commit -a -m "New hello_world.cpp"
+[master fef2d0f] New hello_world.cpp
+ 1 file changed, 6 insertions(+), 6 deletions(-)
+#git add не надо выполнять повторно, посколько файл уже отслеживается
+
+8)
+$ git push origin master
+Username for 'https://github.com': Alex-kku
+Password for 'https://Alex-kku@github.com':*************
+Подсчет объектов: 9, готово.
+Delta compression using up to 8 threads.
+Сжатие объектов: 100% (9/9), готово.
+Запись объектов: 100% (9/9), 1.18 KiB | 1.18 MiB/s, готово.
+Total 9 (delta 1), reused 0 (delta 0)
+remote: Resolving deltas: 100% (1/1), done.
+To https://github.com/Alex-kku/Homework02.git
+   27d596e..fef2d0f  master -> master
+
+9)
+$  git log
+commit fef2d0f9e05fb97f202a3217f4f32eb1d1e333ff (HEAD -> master, origin/master)
+Author: Alex-kku <leha.kushpelev@mai.ru>
+Date:   Tue Jun 2 19:24:22 2020 +0300
+
+    New hello_world.cpp
+
+commit 4d3e1d884f38e4764f97991ed31ff4f9e043d777
+Author: Alex-kku <leha.kushpelev@mai.ru>
+Date:   Tue Jun 2 19:05:43 2020 +0300
+
+    Aadded hello_world.cpp
+
+commit 27d596ebd3a7a5382b5015968a4f676e756201ab
+Author: Alex-kku <leha.kushpelev@mai.ru>
+Date:   Tue Jun 2 18:38:46 2020 +0300
+
+    first commit
+
+
+
 
 
 
