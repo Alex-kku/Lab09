@@ -495,13 +495,70 @@ Date:   Tue Jun 2 20:45:24 2020 +0300
 $ git branch -d patch1
 Ветка patch1 удалена (была 24da591).
  ```
+### Part III
 
+1)
+```sh
+$ git branch patch2
+$ git checkout patch2
 
-Уже обновлено.
- ```
-
-
-
+```
+2)
+```sh
+$ clang-format -style=Chromium -i hello_world.cpp
+```
+3)
+```sh
+$ git commit -a -m "New Style"
+[patch2 b6ef751] New Style-Chromium
+ 1 file changed, 7 insertions(+), 8 deletions(-)
+$ git push origin patch2
+Username for 'https://github.com': Alex-kku
+Password for 'https://Alex-kku@github.com':*************
+Подсчет объектов: 3, готово.
+Delta compression using up to 8 threads.
+Сжатие объектов: 100% (3/3), готово.
+Запись объектов: 100% (3/3), 427 bytes | 427.00 KiB/s, готово.
+Total 3 (delta 0), reused 0 (delta 0)
+To https://github.com/Alex-kku/Homework02.git
+   24da591..b6ef751  patch2 -> patch2
+```
+4)
+5)
+6)
+```sh
+$ git checkout master
+$ git pull origin master
+Из https://github.com/Alex-kku/Homework02
+ * branch            master     -> FETCH_HEAD
+Обновление e883769..aee1443
+Fast-forward
+ hello_world.cpp | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+$ git checkout patch2
+$ git rebase master
+Похоже, каталог rebase-apply уже существует и я предполагаю, что вы в процессе другого перемещения.  Если это так, попробуйте
+	git rebase (--continue | --abort | --skip)
+Если нет
+	rm -fr "/home/baha/Alex-kku/workspace/projects/homework02/.git/rebase-apply"
+и запустите меня снова.  Я останавливаюсь, чтобы вы не потеряли что-то важное.
+$ edit hello_world.cpp
+$ git add hello_world.cpp
+$ git commit -m "Fix conflicts"
+$ git rebase --continue
+$ git checkout master
+$ git merge patch2
+Автослияние hello_world.cpp
+Merge made by the 'recursive' strategy.
+ hello_world.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+```
+7)
+```sh
+$ git push -f origin patch2
+```
+8)
+9)
 
 ## Links
 
