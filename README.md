@@ -69,7 +69,7 @@ $ git commit -m"added README.md"
 нечего коммитить, нет изменений в рабочем каталоге
 $ git push origin master
 Username for 'https://github.com': Alex-kku
-Password for 'https://Alex-kku@github.com': 
+Password for 'https://Alex-kku@github.com': *************
 Everything up-to-date
 ```
 
@@ -85,7 +85,34 @@ Everything up-to-date
 
 ```sh
 $ git pull origin master
+remote: Enumerating objects: 8, done.
+remote: Counting objects: 100% (8/8), done.
+remote: Compressing objects: 100% (5/5), done.
+remote: Total 6 (delta 2), reused 0 (delta 0), pack-reused 0
+Распаковка объектов: 100% (6/6), готово.
+Из https://github.com/Alex-kku/lab02
+ * branch            master     -> FETCH_HEAD
+   af8687b..257420e  master     -> origin/master
+Обновление af8687b..257420e
+Fast-forward
+ .gitignore |  4 ++++
+ README.md  | 34 +++++++++++++++++++++++++---------
+ 2 files changed, 29 insertions(+), 9 deletions(-)
+ create mode 100644 .gitignore
 $ git log
+commit 257420e6e377dded291edfc5a3bfc22826a8ce82 (HEAD -> master, origin/master)
+Author: Alex-kku <61166074+Alex-kku@users.noreply.github.com>
+Date:   Tue Jun 2 16:28:37 2020 +0300
+
+    Create .gitignore
+
+commit ed018f8867d4fcba83ee7e64a6d43e32b3358b2b
+Author: Alex-kku <61166074+Alex-kku@users.noreply.github.com>
+Date:   Tue Jun 2 16:25:12 2020 +0300
+
+    Update README.md
+
+
 ```
 
 ```sh
@@ -149,15 +176,41 @@ $ edit README.md
 
 ```sh
 $ git status
+На ветке master
+Неотслеживаемые файлы:
+  (используйте «git add <файл>…», чтобы добавить в то, что будет включено в коммит)
+
+	examples/
+	include/
+	sources/
+
+ничего не добавлено в коммит, но есть неотслеживаемые файлы (используйте «git add», чтобы отслеживать их)
 $ git add .
 $ git commit -m"added sources"
+[master f321971] added sources
+ 4 files changed, 32 insertions(+)
+ create mode 100644 examples/example1.cpp
+ create mode 100644 examples/example2.cpp
+ create mode 100644 include/print.hpp
+ create mode 100644 sources/print.cpp
 $ git push origin master
+Username for 'https://github.com': Alex-kku
+Password for 'https://Alex-kku@github.com':*************
+Подсчет объектов: 9, готово.
+Delta compression using up to 8 threads.
+Сжатие объектов: 100% (7/7), готово.
+Запись объектов: 100% (9/9), 1000 bytes | 1000.00 KiB/s, готово.
+Total 9 (delta 0), reused 0 (delta 0)
+remote: This repository moved. Please use the new location:
+remote:   https://github.com/Alex-kku/Lab02.git
+To https://github.com/Alex-kku/lab02.git
+   257420e..f321971  master -> master
 ```
 
 ## Report
 
 ```sh
-$ cd ~/workspace/
+$ cd ~/Alex-kku/workspace
 $ export LAB_NUMBER=02
 $ git clone https://github.com/tp-labs/lab${LAB_NUMBER}.git tasks/lab${LAB_NUMBER}
 $ mkdir reports/lab${LAB_NUMBER}
