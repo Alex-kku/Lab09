@@ -278,7 +278,7 @@ $ git init
 Инициализирован пустой репозиторий Git в /home/baha/Alex-kku/workspace/projects/homework02/.git/
 $ git add README.md
 $ git commit -m "first commit"
-[master (корневой коммит) 27d596e] first commit
+[master (корневой коммит) 30c4330] first commit
  1 file changed, 1 insertion(+)
  create mode 100644 README.md
 $ git remote add origin https://github.com/Alex-kku/Homework02.git
@@ -286,7 +286,7 @@ $ git push -u origin master
 Username for 'https://github.com': Alex-kku
 Password for 'https://Alex-kku@github.com':*************
 Подсчет объектов: 3, готово.
-Запись объектов: 100% (3/3), 226 bytes | 226.00 KiB/s, готово.
+Запись объектов: 100% (3/3), 225 bytes | 225.00 KiB/s, готово.
 Total 3 (delta 0), reused 0 (delta 0)
 To https://github.com/Alex-kku/Homework02.git
  * [new branch]      master -> master
@@ -315,57 +315,190 @@ $ git add .
 5)
 ```sh
 $ git commit -m"Aadded hello_world.cpp"
-[master 4d3e1d8] Aadded hello_world.cpp
+[master feee75f] Aadded hello_world.cpp
  1 file changed, 9 insertions(+)
- create mode 100644 hello_world.cpp/hello_world.cpp
+ create mode 100644 hello_world.cpp
  ```
 6)
+```sh
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+	string name;
+	getline(cin, name);
+	cout << "Hello world from " << name << endl;
+	return 0;
+}
+ ```
 7)
 ```sh
 $ git commit -a -m "New hello_world.cpp"
-[master fef2d0f] New hello_world.cpp
- 1 file changed, 6 insertions(+), 6 deletions(-)
+[master 209a510] New hello_world.cpp
+ 1 file changed, 6 insertions(+), 4 deletions(-)
 #git add не надо выполнять повторно, посколько файл уже отслеживается
 ```
 8)
 ```sh
 $ git push origin master
 Username for 'https://github.com': Alex-kku
-Password for 'https://Alex-kku@github.com':*************
-Подсчет объектов: 9, готово.
+Password for 'https://Alex-kku@github.com':************* 
+Подсчет объектов: 6, готово.
 Delta compression using up to 8 threads.
-Сжатие объектов: 100% (9/9), готово.
-Запись объектов: 100% (9/9), 1.18 KiB | 1.18 MiB/s, готово.
-Total 9 (delta 1), reused 0 (delta 0)
-remote: Resolving deltas: 100% (1/1), done.
+Сжатие объектов: 100% (6/6), готово.
+Запись объектов: 100% (6/6), 760 bytes | 380.00 KiB/s, готово.
+Total 6 (delta 0), reused 0 (delta 0)
 To https://github.com/Alex-kku/Homework02.git
-   27d596e..fef2d0f  master -> master
+   30c4330..209a510  master -> master
 ```
 9)
 ```sh
 $  git log
-commit fef2d0f9e05fb97f202a3217f4f32eb1d1e333ff (HEAD -> master, origin/master)
+commit 209a5108ed1ce6353a5b105231499fd79d772885 (HEAD -> master, origin/master)
 Author: Alex-kku <leha.kushpelev@mai.ru>
-Date:   Tue Jun 2 19:24:22 2020 +0300
+Date:   Tue Jun 2 20:58:18 2020 +0300
 
     New hello_world.cpp
 
-commit 4d3e1d884f38e4764f97991ed31ff4f9e043d777
+commit feee75f3c404bb583265520a720e70d9c12cfee1
 Author: Alex-kku <leha.kushpelev@mai.ru>
-Date:   Tue Jun 2 19:05:43 2020 +0300
+Date:   Tue Jun 2 20:51:04 2020 +0300
 
     Aadded hello_world.cpp
 
-commit 27d596ebd3a7a5382b5015968a4f676e756201ab
+commit 30c4330d7e94924d9c6c2e22c99be336d3736a76
 Author: Alex-kku <leha.kushpelev@mai.ru>
-Date:   Tue Jun 2 18:38:46 2020 +0300
+Date:   Tue Jun 2 20:45:24 2020 +0300
 
     first commit
 ```
 ### Part II
 
 1)
+```sh
+$ git branch patch1
+$ git checkout patch1
+```
+2)
+```sh
+$subl hello_world.cpp
+$cat > hello_world.cpp <<EOF
+> #include <iosrteam>
+> int main()
+> {
+>     std::string name;
+>     getline(cin, name);
+>     std::cout << "Hello world from " << name << std::endl;
+>     return 0;
+> }
+> EOF
+```
+3)
+```sh
+$ git commit -m "Deletes using namespace std"
+[patch1 9b31eb6] Deletes using namespace std
+ 1 file changed, 5 insertions(+), 8 deletions(-)
+$ git push origin patch1
+Username for 'https://github.com': Alex-kku
+Password for 'https://Alex-kku@github.com':*************  
+Подсчет объектов: 3, готово.
+Delta compression using up to 8 threads.
+Сжатие объектов: 100% (3/3), готово.
+Запись объектов: 100% (3/3), 412 bytes | 412.00 KiB/s, готово.
+Total 3 (delta 0), reused 0 (delta 0)
+remote: 
+remote: Create a pull request for 'patch1' on GitHub by visiting:
+remote:      https://github.com/Alex-kku/Homework02/pull/new/patch1
+remote: 
+To https://github.com/Alex-kku/Homework02.git
+ * [new branch]      patch1 -> patch1
+```
+4)
+5)
+6)
+```sh
+$  cat > hello_world.cpp <<EOF
+> #include <iosrteam> 
+> int main()
+> {
+>     std::string name;
+>     getline(cin, name);//enter the name
+>     std::cout << "Hello world from " << name << std::endl;//print
+>     return 0;
+> } 
+> EOF
+ ```
+7)
+ ```sh
+ $ git commit -a -m "Add comments"
+[patch1 24da591] Add comments
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+$ git push origin patch1
+Username for 'https://github.com': Alex-kku
+Password for 'https://Alex-kku@github.com':************* 
+Подсчет объектов: 3, готово.
+Delta compression using up to 8 threads.
+Сжатие объектов: 100% (3/3), готово.
+Запись объектов: 100% (3/3), 415 bytes | 415.00 KiB/s, готово.
+Total 3 (delta 0), reused 0 (delta 0)
+To https://github.com/Alex-kku/Homework02.git
+   9b31eb6..24da591  patch1 -> patch1
+```
+8)
+9)
+10)
+ ```sh
+$ git checkout master
+$ git merge patch1
+Обновление 209a510..24da591
+Fast-forward
+ hello_world.cpp | 15 ++++++---------
+ 1 file changed, 6 insertions(+), 9 deletions(-)
+ ```
+11)
+ ```sh
+$ git log
+commit 24da5911eb7db577c0075fcb989c0b9614d44ab5 (HEAD -> master, origin/patch1, patch1)
+Author: Alex-kku <leha.kushpelev@mai.ru>
+Date:   Tue Jun 2 22:34:34 2020 +0300
 
+    Add comments
+
+commit 9b31eb60bb637cac4068215ecffdb268311185be
+Author: Alex-kku <leha.kushpelev@mai.ru>
+Date:   Tue Jun 2 21:42:03 2020 +0300
+
+    Deletes using namespace std
+
+commit 209a5108ed1ce6353a5b105231499fd79d772885 (origin/master)
+Author: Alex-kku <leha.kushpelev@mai.ru>
+Date:   Tue Jun 2 20:58:18 2020 +0300
+
+    New hello_world.cpp
+
+commit feee75f3c404bb583265520a720e70d9c12cfee1
+Author: Alex-kku <leha.kushpelev@mai.ru>
+Date:   Tue Jun 2 20:51:04 2020 +0300
+
+    Aadded hello_world.cpp
+
+commit 30c4330d7e94924d9c6c2e22c99be336d3736a76
+Author: Alex-kku <leha.kushpelev@mai.ru>
+Date:   Tue Jun 2 20:45:24 2020 +0300
+
+    first commit
+```
+12)
+ ```sh
+$ git branch -d patch1
+Ветка patch1 удалена (была 24da591).
+ ```
+
+
+Уже обновлено.
+ ```
 
 
 
