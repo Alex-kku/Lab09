@@ -269,6 +269,58 @@ $ gist REPORT.md
 
 1)
 
+2)
+
+$ mkdir homework02
+$ cd homework02
+$ subl README.md
+$ echo "# Homework02" >> README.md
+$ git init
+Инициализирован пустой репозиторий Git в /home/baha/Alex-kku/workspace/projects/homework02/.git/
+$ git add README.md
+$ git commit -m "first commit"
+[master (корневой коммит) 27d596e] first commit
+ 1 file changed, 1 insertion(+)
+ create mode 100644 README.md
+$ git remote add origin https://github.com/Alex-kku/Homework02.git
+$ git push -u origin master
+Username for 'https://github.com': Alex-kku
+Password for 'https://Alex-kku@github.com':*************
+Подсчет объектов: 3, готово.
+Запись объектов: 100% (3/3), 226 bytes | 226.00 KiB/s, готово.
+Total 3 (delta 0), reused 0 (delta 0)
+To https://github.com/Alex-kku/Homework02.git
+ * [new branch]      master -> master
+Ветка «master» отслеживает внешнюю ветку «master» из «origin».
+
+3)
+$ mkdir hello_world.cpp
+$ cd hello_world.cpp
+$ cat > hello_world.cpp <<EOF
+#include <iosrteam>
+
+using namespase std;
+
+int main()
+{
+cout << "Hello, world!" << endl;
+return 0;
+}
+EOF
+
+4)
+$ git add .
+
+5)
+$ git commit -m"Aadded hello_world.cpp"
+[master 4d3e1d8] Aadded hello_world.cpp
+ 2 files changed, 9 insertions(+)
+ create mode 100644 hello_world.cpp/.hello_world.cpp.swp
+ create mode 100644 hello_world.cpp/hello_world.cpp
+
+6)
+
+
 
 
 ## Links
