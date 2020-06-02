@@ -268,8 +268,8 @@ $ gist REPORT.md
 ### Part I
 
 1)
-
 2)
+```sh
 $ mkdir homework02
 $ cd homework02
 $ subl README.md
@@ -291,8 +291,9 @@ Total 3 (delta 0), reused 0 (delta 0)
 To https://github.com/Alex-kku/Homework02.git
  * [new branch]      master -> master
 Ветка «master» отслеживает внешнюю ветку «master» из «origin».
-
+```
 3)
+```sh
 $ mkdir hello_world.cpp
 $ cd hello_world.cpp
 $ cat > hello_world.cpp <<EOF
@@ -306,25 +307,28 @@ cout << "Hello, world!" << endl;
 return 0;
 }
 EOF
-
+```
 4)
+```sh
 $ git add .
-
+```
 5)
+```sh
 $ git commit -m"Aadded hello_world.cpp"
 [master 4d3e1d8] Aadded hello_world.cpp
  1 file changed, 9 insertions(+)
  create mode 100644 hello_world.cpp/hello_world.cpp
-
+ ```
 6)
-
 7)
+```sh
 $ git commit -a -m "New hello_world.cpp"
 [master fef2d0f] New hello_world.cpp
  1 file changed, 6 insertions(+), 6 deletions(-)
 #git add не надо выполнять повторно, посколько файл уже отслеживается
-
+```
 8)
+```sh
 $ git push origin master
 Username for 'https://github.com': Alex-kku
 Password for 'https://Alex-kku@github.com':*************
@@ -336,8 +340,9 @@ Total 9 (delta 1), reused 0 (delta 0)
 remote: Resolving deltas: 100% (1/1), done.
 To https://github.com/Alex-kku/Homework02.git
    27d596e..fef2d0f  master -> master
-
+```
 9)
+```sh
 $  git log
 commit fef2d0f9e05fb97f202a3217f4f32eb1d1e333ff (HEAD -> master, origin/master)
 Author: Alex-kku <leha.kushpelev@mai.ru>
@@ -356,8 +361,10 @@ Author: Alex-kku <leha.kushpelev@mai.ru>
 Date:   Tue Jun 2 18:38:46 2020 +0300
 
     first commit
+```
+### Part II
 
-
+1)
 
 
 
