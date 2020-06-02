@@ -263,6 +263,14 @@ $ gist REPORT.md
 8. Убедитель, что в pull-request пропали конфликтны. 
 9. Вмержите pull-request `patch2 -> master`.
 
+## Homework
+
+### Part I
+
+1)
+
+
+
 ## Links
 
 - [hub](https://hub.github.com/)
