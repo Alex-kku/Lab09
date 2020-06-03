@@ -39,7 +39,7 @@ remote: Total 130 (delta 47), reused 100 (delta 30), pack-reused 0
 Определение изменений: 100% (47/47), готово.
 $ cd projects/lab03
 $ git remote remove origin
-$ git remote add origin https://github.com/${GITHUB_USERNAME}/lab03.git
+$ git remote add origin https://github.com/${GITHUB_USERNAME}/Lab03.git
 ```
 
 ```sh
@@ -324,12 +324,123 @@ $ gist REPORT.md
 Создайте `CMakeList.txt` в директории [formatter_lib](formatter_lib),
 с помощью которого можно будет собирать статическую библиотеку *formatter*.
 
+$ mkdir homework03
+$ cd homework03
+$ git clone https://github.com/tp-labs/lab03 tmp
+Клонирование в «tmp»…
+remote: Enumerating objects: 15, done.
+remote: Counting objects: 100% (15/15), done.
+remote: Compressing objects: 100% (13/13), done.
+remote: Total 88 (delta 7), reused 4 (delta 2), pack-reused 73
+Распаковка объектов: 100% (88/88), готово.
+$ cd tmp
+$ cd formatter_lib
+$ cat > CMakeLists.txt <<EOF
+> cmake_minimum_required(VERSION 3.4)
+> project(formatter)
+> EOF
+$ cat >> CMakeLists.txt <<EOF
+> 
+> set(CMAKE_CXX_STANDARD 20)
+> set(CMAKE_CXX_STANDARD_REQUIRED ON)
+> EOF
+$ cat >> CMakeLists.txt <<EOF
+> 
+> add_library(formatter STATIC \${CMAKE_CURRENT_SOURCE_DIR}/formatter.cpp)
+> EOF
+$ cat >> CMakeLists.txt <<EOF
+> 
+> include_directories(\${CMAKE_CURRENT_SOURCE_DIR})
+> EOF
+$ cmake -H. -B_build
+-- The C compiler identification is GNU 7.5.0
+-- The CXX compiler identification is GNU 7.5.0
+-- Check for working C compiler: /usr/bin/cc
+-- Check for working C compiler: /usr/bin/cc -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Check for working CXX compiler: /usr/bin/c++
+-- Check for working CXX compiler: /usr/bin/c++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/baha/Alex-kku/workspace/projects/homework03/tmp/formatter_lib/_build
+$ cmake --build _build
+Scanning dependencies of target formatter
+[ 50%] Building CXX object CMakeFiles/formatter.dir/formatter.cpp.o
+[100%] Linking CXX static library libformatter.a
+[100%] Built target formatter
+$ ls _build/libformatter.a
+_build/libformatter.a
+
+
+
+
+
+
+
+
+
 ### Задание 2
 У компании "Formatter Inc." есть перспективная библиотека,
 которая является расширением предыдущей библиотеки. Т.к. вы уже овладели
 навыком созданием `CMakeList.txt` для статической библиотеки *formatter*, ваш 
 руководитель поручает заняться созданием `CMakeList.txt` для библиотеки 
 *formatter_ex*, которая в свою очередь использует библиотеку *formatter*.
+
+$ cd ..
+$ cd formatter_ex_lib
+$ cat > CMakeLists.txt <<EOF
+> cmake_minimum_required(VERSION 3.10)
+> project(formatter_ex)
+> EOF
+$ cat >> CMakeLists.txt <<EOF
+> set(CMAKE_CXX_STANDARD 11)
+> set(CMAKE_CXX_STANDARD_REQUIRED ON)
+> set(CMAKE_CURRENT_SOURCE_DIR /home/baha/Alex-kku/workspace/projects/homework03/tmp)
+> EOF
+$ cat >> CMakeLists.txt <<EOF
+> add_library(formatter_ex STATIC \${CMAKE_CURRENT_SOURCE_DIR}/formatter_ex_lib/formatter_ex.cpp)
+> EOF
+$ cat >> CMakeLists.txt <<EOF
+> include_directories(\${CMAKE_CURRENT_SOURCE_DIR}/formatter_ex_lib)
+> EOF
+$ cat >> CMakeLists.txt <<EOF
+> include_directories(\${CMAKE_CURRENT_SOURCE_DIR}/formatter_lib)
+> target_link_libraries(formatter_ex formatter)
+> EOF
+$ cmake -H. -B_build
+-- The C compiler identification is GNU 7.5.0
+-- The CXX compiler identification is GNU 7.5.0
+-- Check for working C compiler: /usr/bin/cc
+-- Check for working C compiler: /usr/bin/cc -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Check for working CXX compiler: /usr/bin/c++
+-- Check for working CXX compiler: /usr/bin/c++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/baha/Alex-kku/workspace/projects/homework03/tmp/formatter_ex_lib/_build
+$ cmake --build _build
+Scanning dependencies of target formatter_ex
+[ 50%] Building CXX object CMakeFiles/formatter_ex.dir/formatter_ex.cpp.o
+[100%] Linking CXX static library libformatter_ex.a
+[100%] Built target formatter_ex
+$ ls _build/libformatter_ex.a
+_build/libformatter_ex.a
+
+
 
 ### Задание 3
 Конечно же ваша компания предоставляет примеры использования своих библиотек.
