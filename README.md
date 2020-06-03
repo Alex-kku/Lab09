@@ -450,6 +450,65 @@ _build/libformatter_ex.a
 * *solver*, приложение которое испольует статические библиотеки *formatter_ex* и *solver_lib*.
 
 **Удачной стажировки!**
+$ cd ..
+$ cd  hello_world_application
+$ cat > CMakeLists.txt <<EOF
+> cmake_minimum_required(VERSION 3.10)
+> project(Hello_world)
+> EOF
+$ cat >> CMakeLists.txt <<EOF
+> set(CMAKE_CXX_STANDARD 11)
+> set(CMAKE_CXX_STANDARD_REQUIRED ON)
+> set(CMAKE_CURRENT_SOURCE_DIR /home/baha/Alex-kku/workspace/projects/homework03/tmp)
+> EOF
+$ cat >> CMakeLists.txt <<EOF
+> add_executable(Hello_world \${CMAKE_CURRENT_SOURCE_DIR}/hello_world_application/hello_world.cpp)
+> EOF
+$ cat >> CMakeLists.txt <<EOF
+> include_directories(\${CMAKE_CURRENT_SOURCE_DIR}/formatter_lib \${CMAKE_CURRENT_SOURCE_DIR}/formatter_ex_lib)
+> add_library(Hello STATIC \${CMAKE_CURRENT_SOURCE_DIR}/formatter_ex_lib/formatter_ex.cpp \${CMAKE_CURRENT_SOURCE_DIR}/formatter_lib/formatter.cpp)
+> target_link_libraries(Hello_world Hello)
+> EOF
+$ cmake -H. -B_build
+-- The C compiler identification is GNU 7.5.0
+-- The CXX compiler identification is GNU 7.5.0
+-- Check for working C compiler: /usr/bin/cc
+-- Check for working C compiler: /usr/bin/cc -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Check for working CXX compiler: /usr/bin/c++
+-- Check for working CXX compiler: /usr/bin/c++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/baha/Alex-kku/workspace/projects/homework03/tmp/hello_world_application/_build
+$  cmake --build _build
+Scanning dependencies of target Hello
+[ 20%] Building CXX object CMakeFiles/Hello.dir/home/baha/Alex-kku/workspace/projects/homework03/tmp/formatter_ex_lib/formatter_ex.cpp.o
+[ 40%] Building CXX object CMakeFiles/Hello.dir/home/baha/Alex-kku/workspace/projects/homework03/tmp/formatter_lib/formatter.cpp.o
+[ 60%] Linking CXX static library libHello.a
+[ 60%] Built target Hello
+Scanning dependencies of target Hello_world
+[ 80%] Building CXX object CMakeFiles/Hello_world.dir/hello_world.cpp.o
+[100%] Linking CXX executable Hello_world
+[100%] Built target Hello_world
+$ _build/Hello_world 
+-------------------------
+hello, world!
+-------------------------
+
+
+
+
+
+
+
+
 
 ## Links
 - [Основы сборки проектов на С/C++ при помощи CMake](https://eax.me/cmake/)
