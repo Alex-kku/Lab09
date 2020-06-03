@@ -340,16 +340,13 @@ $ cat > CMakeLists.txt <<EOF
 > project(formatter)
 > EOF
 $ cat >> CMakeLists.txt <<EOF
-> 
 > set(CMAKE_CXX_STANDARD 20)
 > set(CMAKE_CXX_STANDARD_REQUIRED ON)
 > EOF
 $ cat >> CMakeLists.txt <<EOF
-> 
 > add_library(formatter STATIC \${CMAKE_CURRENT_SOURCE_DIR}/formatter.cpp)
 > EOF
 $ cat >> CMakeLists.txt <<EOF
-> 
 > include_directories(\${CMAKE_CURRENT_SOURCE_DIR})
 > EOF
 $ cmake -H. -B_build
@@ -371,19 +368,12 @@ $ cmake -H. -B_build
 -- Generating done
 -- Build files have been written to: /home/baha/Alex-kku/workspace/projects/homework03/tmp/formatter_lib/_build
 $ cmake --build _build
-Scanning dependencies of target formatter
+canning dependencies of target formatter
 [ 50%] Building CXX object CMakeFiles/formatter.dir/formatter.cpp.o
 [100%] Linking CXX static library libformatter.a
 [100%] Built target formatter
 $ ls _build/libformatter.a
 _build/libformatter.a
-
-
-
-
-
-
-
 
 
 ### Задание 2
@@ -518,8 +508,70 @@ $ cat >> CMakeLists.txt <<EOF
 >target_link_libraries(Solver solver)
 >EOF
 $ cmake -H. -B_build
+-- The C compiler identification is GNU 7.5.0
+-- The CXX compiler identification is GNU 7.5.0
+-- Check for working C compiler: /usr/bin/cc
+-- Check for working C compiler: /usr/bin/cc -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Check for working CXX compiler: /usr/bin/c++
+-- Check for working CXX compiler: /usr/bin/c++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/baha/Alex-kku/workspace/projects/homework03/tmp/solver_application/_build
 $ cmake --build _build
+Scanning dependencies of target solver
+[ 16%] Building CXX object CMakeFiles/solver.dir/home/baha/Alex-kku/workspace/projects/homework03/tmp/solver_lib/solver.cpp.o
+[ 33%] Building CXX object CMakeFiles/solver.dir/home/baha/Alex-kku/workspace/projects/homework03/tmp/formatter_ex_lib/formatter_ex.cpp.o
+[ 50%] Building CXX object CMakeFiles/solver.dir/home/baha/Alex-kku/workspace/projects/homework03/tmp/formatter_lib/formatter.cpp.o
+[ 66%] Linking CXX static library libsolver.a
+[ 66%] Built target solver
+Scanning dependencies of target Solver
+[ 83%] Building CXX object CMakeFiles/Solver.dir/equation.cpp.o
+[100%] Linking CXX executable Solver
+[100%] Built target Solver
 $ _build/Solver
+3
+4
+5
+-------------------------
+error: discriminant < 0
+-------------------------
+$ _build/Solver
+3
+12
+4
+-------------------------
+x1 = -3.632993
+-------------------------
+-------------------------
+x2 = -0.367007
+-------------------------
+$ cd ..
+$ git add .
+$ git commit -a -m "Homework done" 
+[master 0a0e79e] Homework done
+ 166 files changed, 14465 insertions(+), 2 deletions(-)
+$ git remote remove origin
+$ git remote add origin https://github.com/Alex-kku/Homework03.git
+$ git push origin master
+Username for 'https://github.com': Alex-kku
+Password for 'https://Alex-kku@github.com':**************
+Подсчет объектов: 247, готово.
+Delta compression using up to 8 threads.
+Сжатие объектов: 100% (220/220), готово.
+Запись объектов: 100% (247/247), 1.09 MiB | 311.00 KiB/s, готово.
+Total 247 (delta 111), reused 0 (delta 0)
+remote: Resolving deltas: 100% (111/111), done.
+To https://github.com/Alex-kku/Homework03.git
+ * [new branch]      master -> master
+
 
 
 
