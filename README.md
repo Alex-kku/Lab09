@@ -502,8 +502,24 @@ $ _build/Hello_world
 hello, world!
 -------------------------
 
-
-
+$ cd ..
+$ cd solver_application
+$ cat >> CMakeLists.txt <<EOF
+>cmake_minimum_required(VERSION 3.10)
+>project(Solver)
+>set(CMAKE_CXX_STANDARD 11)
+>set(CMAKE_CXX_STANDARD_REQUIRED ON)
+>set(CMAKE_CURRENT_SOURCE_DIR /home/baha/Alex-kku/workspace/projects/homework03/tmp)
+>add_library(solver STATIC \${CMAKE_CURRENT_SOURCE_DIR}/solver_lib/solver.cpp \${CMAKE_CURRENT_SOURCE_DIR}/formatter_ex_lib/formatter_ex.cpp \${CMAKE_CURRENT_SOURCE_DIR}/formatter_lib/formatter.cpp)
+>EOF
+$ cat >> CMakeLists.txt <<EOF
+>include_directories(\${CMAKE_CURRENT_SOURCE_DIR}/solver_lib \${CMAKE_CURRENT_SOURCE_DIR}/formatter_ex_lib \${CMAKE_CURRENT_SOURCE_DIR}/formatter_lib)
+>add_executable(Solver \${CMAKE_CURRENT_SOURCE_DIR}/solver_application/equation.cpp)
+>target_link_libraries(Solver solver)
+>EOF
+$ cmake -H. -B_build
+$ cmake --build _build
+$ _build/Solver
 
 
 
