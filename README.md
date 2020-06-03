@@ -1,218 +1,312 @@
-## Laboratory work II
+## Laboratory work III
 
-<a href="https://yandex.ru/efir/?stream_id=vMPJl0nEKr_0"><img src="https://raw.githubusercontent.com/tp-labs/lab02/master/preview.png" width="640"/></a>
+<a href="https://yandex.ru/efir/?stream_id=vjKAlxJ0UQrs"><img src="https://raw.githubusercontent.com/tp-labs/lab03/master/preview.png" width="640"/></a>
 
-Данная лабораторная работа посвещена изучению систем контроля версий на примере **Git**.
+Данная лабораторная работа посвещена изучению систем автоматизации сборки проекта на примере **CMake**
 
-```bash
-$ open https://git-scm.com
+```sh
+$ open https://cmake.org/
 ```
 
 ## Tasks
 
-- [x] 1. Создать публичный репозиторий с названием **lab02** и с лиценцией **MIT**
-- [x] 2. Сгенирировать токен для доступа к сервису **GitHub** с правами **repo**
-- [x] 3. Ознакомиться со ссылками учебного материала
-- [x] 4. Выполнить инструкцию учебного материала
-- [x] 5. Составить отчет и отправить ссылку личным сообщением в **Slack**
+- [x] 1. Создать публичный репозиторий с названием **lab03** на сервисе **GitHub**
+- [x] 2. Ознакомиться со ссылками учебного материала
+- [x] 3. Выполнить инструкцию учебного материала
+- [x] 4. Составить отчет и отправить ссылку личным сообщением в **Slack**
 
 ## Tutorial
 
 ```sh
 $ export GITHUB_USERNAME=Alex-kku
-$ export GITHUB_EMAIL=leha.kushpelev@mai.ru
-$ export GITHUB_TOKEN=*******************************
-$ alias edit=subl
 ```
 
 ```sh
 $ cd ${GITHUB_USERNAME}/workspace
+$ pushd .
+~/Alex-kku/workspace ~/Alex-kku/workspace
 $ source scripts/activate
 ```
 
 ```sh
-$ mkdir ~/.config
-$ cat > ~/.config/hub <<EOF
-github.com:
-- user: ${GITHUB_USERNAME}
-  oauth_token: ${GITHUB_TOKEN}
-  protocol: https
-EOF
-$ git config --global hub.protocol https
+$ git clone https://github.com/${GITHUB_USERNAME}/Lab02.git projects/Lab03
+Клонирование в «projects/Lab03»…
+remote: Enumerating objects: 130, done.
+remote: Counting objects: 100% (130/130), done.
+remote: Compressing objects: 100% (96/96), done.
+remote: Total 130 (delta 47), reused 100 (delta 30), pack-reused 0
+Получение объектов: 100% (130/130), 1.29 MiB | 800.00 KiB/s, готово.
+Определение изменений: 100% (47/47), готово.
+$ cd projects/lab03
+$ git remote remove origin
+$ git remote add origin https://github.com/${GITHUB_USERNAME}/lab03.git
 ```
 
 ```sh
-$ mkdir projects/lab02 && cd projects/lab02
-$ git init
-Инициализирован пустой репозиторий Git в /home/baha/Alex-kku/workspace/projects/lab02/.git/
-$ git config --global user.name ${GITHUB_USERNAME}
-$ git config --global user.email ${GITHUB_EMAIL}
-# check your git global settings
-$ git config -e --global
-$ git remote add origin https://github.com/${GITHUB_USERNAME}/lab02.git
-$ git pull origin master
-remote: Enumerating objects: 93, done.
-remote: Counting objects: 100% (93/93), done.
-remote: Compressing objects: 100% (62/62), done.
-remote: Total 93 (delta 30), reused 93 (delta 30), pack-reused 0
-Распаковка объектов: 100% (93/93), готово.
-Из https://github.com/Alex-kku/lab02
- * branch            master     -> FETCH_HEAD
- * [новая ветка]     master     -> origin/master
-$ touch README.md
-$ git status
-На ветке master
-нечего коммитить, нет изменений в рабочем каталоге
-$ git add README.md
-$ git commit -m"added README.md"
-На ветке master
-нечего коммитить, нет изменений в рабочем каталоге
+$ g++ -std=c++11 -I./include -c sources/print.cpp
+$ ls print.o
+print.o
+$ nm print.o | grep print
+0000000000000095 t _GLOBAL__sub_I__Z5printRKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEERSo
+0000000000000000 T _Z5printRKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEERSo
+0000000000000026 T _Z5printRKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEERSt14basic_ofstreamIcS2_E
+$ ar rvs print.a print.o
+ar: создаётся print.a
+a - print.o
+$ file print.a
+print.a: current ar archive
+$ g++ -std=c++11 -I./include -c examples/example1.cpp
+$ ls example1.o
+example1.o
+$ g++ example1.o print.a -o example1
+$ ./example1 && echo
+hello
+```
+
+```sh
+$ g++ -std=c++11 -I./include -c examples/example2.cpp
+$ nm example2.o
+                 U __cxa_atexit
+                 U __dso_handle
+0000000000000000 V DW.ref.__gxx_personality_v0
+                 U _GLOBAL_OFFSET_TABLE_
+000000000000016f t _GLOBAL__sub_I_main
+                 U __gxx_personality_v0
+0000000000000000 T main
+                 U __stack_chk_fail
+                 U _Unwind_Resume
+0000000000000126 t _Z41__static_initialization_and_destruction_0ii
+                 U _Z5printRKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEERSt14basic_ofstreamIcS2_E
+                 U _ZNSaIcEC1Ev
+                 U _ZNSaIcED1Ev
+                 U _ZNSt14basic_ofstreamIcSt11char_traitsIcEEC1EPKcSt13_Ios_Openmode
+                 U _ZNSt14basic_ofstreamIcSt11char_traitsIcEED1Ev
+                 U _ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEC1EPKcRKS3_
+                 U _ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEED1Ev
+                 U _ZNSt8ios_base4InitC1Ev
+                 U _ZNSt8ios_base4InitD1Ev
+0000000000000000 r _ZStL19piecewise_construct
+0000000000000000 b _ZStL8__ioinit
+0000000000000000 W _ZStorSt13_Ios_OpenmodeS_
+$ g++ example2.o print.a -o example2
+$ ./example2
+$ cat log.txt && echo
+hello
+```
+
+```sh
+$ rm -rf example1.o example2.o print.o
+$ rm -rf print.a
+$ rm -rf example1 example2
+$ rm -rf log.txt
+```
+
+```sh
+$ cat > CMakeLists.txt <<EOF
+cmake_minimum_required(VERSION 3.4)
+project(print)
+EOF
+```
+
+```sh
+$ cat >> CMakeLists.txt <<EOF
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+EOF
+```
+
+```sh
+$ cat >> CMakeLists.txt <<EOF
+add_library(print STATIC \${CMAKE_CURRENT_SOURCE_DIR}/sources/print.cpp)
+EOF
+```
+
+```sh
+$ cat >> CMakeLists.txt <<EOF
+include_directories(\${CMAKE_CURRENT_SOURCE_DIR}/include)
+EOF
+```
+
+```sh
+$ cmake -H. -B_build
+-- The C compiler identification is GNU 7.5.0
+-- The CXX compiler identification is GNU 7.5.0
+-- Check for working C compiler: /usr/bin/cc
+-- Check for working C compiler: /usr/bin/cc -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Check for working CXX compiler: /usr/bin/c++
+-- Check for working CXX compiler: /usr/bin/c++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/baha/Alex-kku/workspace/projects/Lab03/_build
+$ cmake --build _build
+Scanning dependencies of target print
+[ 50%] Building CXX object CMakeFiles/print.dir/sources/print.cpp.o
+[100%] Linking CXX static library libprint.a
+[100%] Built target print
+```
+
+```sh
+$ cat >> CMakeLists.txt <<EOF
+
+add_executable(example1 \${CMAKE_CURRENT_SOURCE_DIR}/examples/example1.cpp)
+add_executable(example2 \${CMAKE_CURRENT_SOURCE_DIR}/examples/example2.cpp)
+EOF
+```
+
+```sh
+$ cat >> CMakeLists.txt <<EOF
+
+target_link_libraries(example1 print)
+target_link_libraries(example2 print)
+EOF
+```
+
+```sh
+$ cmake --build _build
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/baha/Alex-kku/workspace/projects/Lab03/_build
+[ 33%] Built target print
+Scanning dependencies of target example2
+[ 50%] Building CXX object CMakeFiles/example2.dir/examples/example2.cpp.o
+[ 66%] Linking CXX executable example2
+[ 66%] Built target example2
+Scanning dependencies of target example1
+[ 83%] Building CXX object CMakeFiles/example1.dir/examples/example1.cpp.o
+[100%] Linking CXX executable example1
+[100%] Built target example1
+$ cmake --build _build --target print
+[100%] Built target print
+$ cmake --build _build --target example1
+[ 50%] Built target print
+[100%] Built target example1
+$ cmake --build _build --target example2
+[ 50%] Built target print
+[100%] Built target example2
+```
+
+```sh
+$ ls -la _build/libprint.a
+-rw-r--r-- 1 baha baha 3134 июн  3 15:29 _build/libprint.a
+$ _build/example1 && echo
+hello
+$ _build/example2
+$ cat log.txt && echo
+hello
+$ rm -rf log.txt
+```
+
+```sh
+$ git clone https://github.com/tp-labs/lab03 tmp
+Клонирование в «tmp»…
+remote: Enumerating objects: 15, done.
+remote: Counting objects: 100% (15/15), done.
+remote: Compressing objects: 100% (13/13), done.
+remote: Total 88 (delta 7), reused 4 (delta 2), pack-reused 73
+Распаковка объектов: 100% (88/88), готово.
+$ mv -f tmp/CMakeLists.txt .
+$ rm -rf tmp
+```
+
+```sh
+$ cat CMakeLists.txt
+cmake_minimum_required(VERSION 3.4)
+
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+option(BUILD_EXAMPLES "Build examples" OFF)
+
+project(print)
+
+add_library(print STATIC ${CMAKE_CURRENT_SOURCE_DIR}/sources/print.cpp)
+
+target_include_directories(print PUBLIC
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>
+)
+
+if(BUILD_EXAMPLES)
+  file(GLOB EXAMPLE_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/examples/*.cpp")
+  foreach(EXAMPLE_SOURCE ${EXAMPLE_SOURCES})
+    get_filename_component(EXAMPLE_NAME ${EXAMPLE_SOURCE} NAME_WE)
+    add_executable(${EXAMPLE_NAME} ${EXAMPLE_SOURCE})
+    target_link_libraries(${EXAMPLE_NAME} print)
+    install(TARGETS ${EXAMPLE_NAME}
+      RUNTIME DESTINATION bin
+    )
+  endforeach(EXAMPLE_SOURCE ${EXAMPLE_SOURCES})
+endif()
+
+install(TARGETS print
+    EXPORT print-config
+    ARCHIVE DESTINATION lib
+    LIBRARY DESTINATION lib
+)
+
+install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/ DESTINATION include)
+install(EXPORT print-config DESTINATION cmake)
+$ cmake -H. -B_build -DCMAKE_INSTALL_PREFIX=_install
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/baha/Alex-kku/workspace/projects/Lab03/_build
+$ cmake --build _build --target install
+[100%] Built target print
+Install the project...
+-- Install configuration: ""
+-- Installing: /home/baha/Alex-kku/workspace/projects/Lab03/_install/lib/libprint.a
+-- Installing: /home/baha/Alex-kku/workspace/projects/Lab03/_install/include
+-- Installing: /home/baha/Alex-kku/workspace/projects/Lab03/_install/include/print.hpp
+-- Installing: /home/baha/Alex-kku/workspace/projects/Lab03/_install/cmake/print-config.cmake
+-- Installing: /home/baha/Alex-kku/workspace/projects/Lab03/_install/cmake/print-config-noconfig.cmake
+$ tree _install
+_install
+├── cmake
+│   ├── print-config.cmake
+│   └── print-config-noconfig.cmake
+├── include
+│   └── print.hpp
+└── lib
+    └── libprint.a
+
+3 directories, 4 files
+```
+
+```sh
+$ git add CMakeLists.txt
+$ git commit -m"added CMakeLists.txt"
+[master a176d46] added CMakeLists.txt
+ 1 file changed, 36 insertions(+)
+ create mode 100644 CMakeLists.txt
 $ git push origin master
 Username for 'https://github.com': Alex-kku
-Password for 'https://Alex-kku@github.com': *************
-Everything up-to-date
-```
-
-Добавить на сервисе **GitHub** в репозитории **lab02** файл **.gitignore**
-со следующем содержимом:
-
-```sh
-*build*/
-*install*/
-*.swp
-.idea/
-```
-
-```sh
-$ git pull origin master
-remote: Enumerating objects: 8, done.
-remote: Counting objects: 100% (8/8), done.
-remote: Compressing objects: 100% (5/5), done.
-remote: Total 6 (delta 2), reused 0 (delta 0), pack-reused 0
-Распаковка объектов: 100% (6/6), готово.
-Из https://github.com/Alex-kku/lab02
- * branch            master     -> FETCH_HEAD
-   af8687b..257420e  master     -> origin/master
-Обновление af8687b..257420e
-Fast-forward
- .gitignore |  4 ++++
- README.md  | 34 +++++++++++++++++++++++++---------
- 2 files changed, 29 insertions(+), 9 deletions(-)
- create mode 100644 .gitignore
-$ git log
-commit 257420e6e377dded291edfc5a3bfc22826a8ce82 (HEAD -> master, origin/master)
-Author: Alex-kku <61166074+Alex-kku@users.noreply.github.com>
-Date:   Tue Jun 2 16:28:37 2020 +0300
-
-    Create .gitignore
-
-commit ed018f8867d4fcba83ee7e64a6d43e32b3358b2b
-Author: Alex-kku <61166074+Alex-kku@users.noreply.github.com>
-Date:   Tue Jun 2 16:25:12 2020 +0300
-
-    Update README.md
-
-
-```
-
-```sh
-$ mkdir sources
-$ mkdir include
-$ mkdir examples
-$ cat > sources/print.cpp <<EOF
-#include <print.hpp>
-
-void print(const std::string& text, std::ostream& out)
-{
-  out << text;
-}
-
-void print(const std::string& text, std::ofstream& out)
-{
-  out << text;
-}
-EOF
-```
-
-```sh
-$ cat > include/print.hpp <<EOF
-#include <fstream>
-#include <iostream>
-#include <string>
-
-void print(const std::string& text, std::ofstream& out);
-void print(const std::string& text, std::ostream& out = std::cout);
-EOF
-```
-
-```sh
-$ cat > examples/example1.cpp <<EOF
-#include <print.hpp>
-
-int main(int argc, char** argv)
-{
-  print("hello");
-}
-EOF
-```
-
-```sh
-$ cat > examples/example2.cpp <<EOF
-#include <print.hpp>
-
-#include <fstream>
-
-int main(int argc, char** argv)
-{
-  std::ofstream file("log.txt");
-  print(std::string("hello"), file);
-}
-EOF
-```
-
-```sh
-$ edit README.md
-```
-
-```sh
-$ git status
-На ветке master
-Неотслеживаемые файлы:
-  (используйте «git add <файл>…», чтобы добавить в то, что будет включено в коммит)
-
-	examples/
-	include/
-	sources/
-
-ничего не добавлено в коммит, но есть неотслеживаемые файлы (используйте «git add», чтобы отслеживать их)
-$ git add .
-$ git commit -m"added sources"
-[master f321971] added sources
- 4 files changed, 32 insertions(+)
- create mode 100644 examples/example1.cpp
- create mode 100644 examples/example2.cpp
- create mode 100644 include/print.hpp
- create mode 100644 sources/print.cpp
-$ git push origin master
-Username for 'https://github.com': Alex-kku
-Password for 'https://Alex-kku@github.com':*************
-Подсчет объектов: 9, готово.
+Password for 'https://Alex-kku@github.com':************* 
+Подсчет объектов: 133, готово.
 Delta compression using up to 8 threads.
-Сжатие объектов: 100% (7/7), готово.
-Запись объектов: 100% (9/9), 1000 bytes | 1000.00 KiB/s, готово.
-Total 9 (delta 0), reused 0 (delta 0)
+Сжатие объектов: 100% (82/82), готово.
+Запись объектов: 100% (133/133), 1.29 MiB | 358.00 KiB/s, готово.
+Total 133 (delta 48), reused 129 (delta 47)
+remote: Resolving deltas: 100% (48/48), done.
 remote: This repository moved. Please use the new location:
-remote:   https://github.com/Alex-kku/Lab02.git
-To https://github.com/Alex-kku/lab02.git
-   257420e..f321971  master -> master
+remote:   https://github.com/Alex-kku/Lab03.git
+To https://github.com/Alex-kku/lab03.git
+ * [new branch]      master -> master
 ```
 
 ## Report
 
 ```sh
-$ cd ~/Alex-kku/workspace
-$ export LAB_NUMBER=02
-$ git clone https://github.com/tp-labs/lab${LAB_NUMBER}.git tasks/lab${LAB_NUMBER}
+$ popd
+$ export LAB_NUMBER=03
+$ git clone https://github.com/tp-labs/lab${LAB_NUMBER} tasks/lab${LAB_NUMBER}
 $ mkdir reports/lab${LAB_NUMBER}
 $ cp tasks/lab${LAB_NUMBER}/README.md reports/lab${LAB_NUMBER}/REPORT.md
 $ cd reports/lab${LAB_NUMBER}
@@ -222,351 +316,36 @@ $ gist REPORT.md
 
 ## Homework
 
-### Part I
+Представьте, что вы стажер в компании "Formatter Inc.".
+### Задание 1
+Вам поручили перейти на систему автоматизированной сборки **CMake**.
+Исходные файлы находятся в директории [formatter_lib](formatter_lib).
+В этой директории находятся файлы для статической библиотеки *formatter*.
+Создайте `CMakeList.txt` в директории [formatter_lib](formatter_lib),
+с помощью которого можно будет собирать статическую библиотеку *formatter*.
 
-1. Создайте пустой репозиторий на сервисе github.com (или gitlab.com, или bitbucket.com).
-2. Выполните инструкцию по созданию первого коммита на странице репозитория, созданного на предыдещем шаге.
-3. Создайте файл `hello_world.cpp` в локальной копии репозитория (который должен был появиться на шаге 2). Реализуйте программу **Hello world** на языке C++ используя плохой стиль кода. Например, после заголовочных файлов вставьте строку `using namespace std;`.
-4. Добавьте этот файл в локальную копию репозитория.
-5. Закоммитьте изменения с *осмысленным* сообщением.
-6. Изменитьте исходный код так, чтобы программа через стандартный поток ввода запрашивалось имя пользователя. А в стандартный поток вывода печаталось сообщение `Hello world from @name`, где `@name` имя пользователя.
-7. Закоммитьте новую версию программы. Почему не надо добавлять файл повторно `git add`?
-8. Запуште изменения в удалёный репозиторий.
-9. Проверьте, что история коммитов доступна в удалёный репозитории.
+### Задание 2
+У компании "Formatter Inc." есть перспективная библиотека,
+которая является расширением предыдущей библиотеки. Т.к. вы уже овладели
+навыком созданием `CMakeList.txt` для статической библиотеки *formatter*, ваш 
+руководитель поручает заняться созданием `CMakeList.txt` для библиотеки 
+*formatter_ex*, которая в свою очередь использует библиотеку *formatter*.
 
-### Part II
+### Задание 3
+Конечно же ваша компания предоставляет примеры использования своих библиотек.
+Чтобы продемонстрировать как работать с библиотекой *formatter_ex*,
+вам необходимо создать два `CMakeList.txt` для двух простых приложений:
+* *hello_world*, которое использует библиотеку *formatter_ex*;
+* *solver*, приложение которое испольует статические библиотеки *formatter_ex* и *solver_lib*.
 
-**Note:** *Работать продолжайте с теми же репоззиториями, что и в первой части задания.*
-1. В локальной копии репозитория создайте локальную ветку `patch1`.
-2. Внесите изменения в ветке `patch1` по исправлению кода и избавления от `using namespace std;`.
-3. **commit**, **push** локальную ветку в удалённый репозиторий.
-4. Проверьте, что ветка `patch1` доступна в удалёный репозитории.
-5. Создайте pull-request `patch1 -> master`.
-6. В локальной копии в ветке `patch1` добавьте в исходный код комментарии.
-7. **commit**, **push**.
-8. Проверьте, что новые изменения есть в созданном на **шаге 5** pull-request
-9. В удалённый репозитории выполните  слияние PR `patch1 -> master` и удалите ветку `patch1` в удаленном репозитории.
-10. Локально выполните **pull**.
-11. С помощью команды **git log** просмотрите историю в локальной версии ветки `master`.
-12. Удалите локальную ветку `patch1`.
-
-### Part III
-
-**Note:** *Работать продолжайте с теми же репоззиториями, что и в первой части задания.*
-1. Создайте новую локальную ветку `patch2`.
-2. Измените *code style* с помощью утилиты [**clang-format**](http://clang.llvm.org/docs/ClangFormat.html). Например, используя опцию `-style=Mozilla`.
-3. **commit**, **push**, создайте pull-request `patch2 -> master`.
-4. В ветке **master** в удаленном репозитории измените комментарии, например, расставьте знаки препинания, переведите комментарии на другой язык.
-5. Убедитесь, что в pull-request появились *конфликтны*.
-6. Для этого локально выполните **pull** + **rebase** (точную последовательность команд, следует узнать самостоятельно). **Исправьте конфликты**.
-7. Сделайте *force push* в ветку `patch2`
-8. Убедитель, что в pull-request пропали конфликтны. 
-9. Вмержите pull-request `patch2 -> master`.
-
-## Homework
-
-### Part I
-
-1)
-2)
-```sh
-$ mkdir homework02
-$ cd homework02
-$ subl README.md
-$ echo "# Homework02" >> README.md
-$ git init
-Инициализирован пустой репозиторий Git в /home/baha/Alex-kku/workspace/projects/homework02/.git/
-$ git add README.md
-$ git commit -m "first commit"
-[master (корневой коммит) 30c4330] first commit
- 1 file changed, 1 insertion(+)
- create mode 100644 README.md
-$ git remote add origin https://github.com/Alex-kku/Homework02.git
-$ git push -u origin master
-Username for 'https://github.com': Alex-kku
-Password for 'https://Alex-kku@github.com':*************
-Подсчет объектов: 3, готово.
-Запись объектов: 100% (3/3), 225 bytes | 225.00 KiB/s, готово.
-Total 3 (delta 0), reused 0 (delta 0)
-To https://github.com/Alex-kku/Homework02.git
- * [new branch]      master -> master
-Ветка «master» отслеживает внешнюю ветку «master» из «origin».
-```
-3)
-```sh
-$ mkdir hello_world.cpp
-$ cd hello_world.cpp
-$ cat > hello_world.cpp <<EOF
-#include <iosrteam>
-
-using namespase std;
-
-int main()
-{
-cout << "Hello, world!" << endl;
-return 0;
-}
-EOF
-```
-4)
-```sh
-$ git add .
-```
-5)
-```sh
-$ git commit -m"Aadded hello_world.cpp"
-[master feee75f] Aadded hello_world.cpp
- 1 file changed, 9 insertions(+)
- create mode 100644 hello_world.cpp
- ```
-6)
-```sh
-#include <iostream>
-
-using namespace std;
-
-int main()
-{
-	string name;
-	getline(cin, name);
-	cout << "Hello world from " << name << endl;
-	return 0;
-}
- ```
-7)
-```sh
-$ git commit -a -m "New hello_world.cpp"
-[master 209a510] New hello_world.cpp
- 1 file changed, 6 insertions(+), 4 deletions(-)
-#git add не надо выполнять повторно, посколько файл уже отслеживается
-```
-8)
-```sh
-$ git push origin master
-Username for 'https://github.com': Alex-kku
-Password for 'https://Alex-kku@github.com':************* 
-Подсчет объектов: 6, готово.
-Delta compression using up to 8 threads.
-Сжатие объектов: 100% (6/6), готово.
-Запись объектов: 100% (6/6), 760 bytes | 380.00 KiB/s, готово.
-Total 6 (delta 0), reused 0 (delta 0)
-To https://github.com/Alex-kku/Homework02.git
-   30c4330..209a510  master -> master
-```
-9)
-```sh
-$  git log
-commit 209a5108ed1ce6353a5b105231499fd79d772885 (HEAD -> master, origin/master)
-Author: Alex-kku <leha.kushpelev@mai.ru>
-Date:   Tue Jun 2 20:58:18 2020 +0300
-
-    New hello_world.cpp
-
-commit feee75f3c404bb583265520a720e70d9c12cfee1
-Author: Alex-kku <leha.kushpelev@mai.ru>
-Date:   Tue Jun 2 20:51:04 2020 +0300
-
-    Aadded hello_world.cpp
-
-commit 30c4330d7e94924d9c6c2e22c99be336d3736a76
-Author: Alex-kku <leha.kushpelev@mai.ru>
-Date:   Tue Jun 2 20:45:24 2020 +0300
-
-    first commit
-```
-### Part II
-
-1)
-```sh
-$ git branch patch1
-$ git checkout patch1
-```
-2)
-```sh
-$subl hello_world.cpp
-$cat > hello_world.cpp <<EOF
-> #include <iosrteam>
-> int main()
-> {
->     std::string name;
->     getline(cin, name);
->     std::cout << "Hello world from " << name << std::endl;
->     return 0;
-> }
-> EOF
-```
-3)
-```sh
-$ git commit -m "Deletes using namespace std"
-[patch1 9b31eb6] Deletes using namespace std
- 1 file changed, 5 insertions(+), 8 deletions(-)
-$ git push origin patch1
-Username for 'https://github.com': Alex-kku
-Password for 'https://Alex-kku@github.com':*************  
-Подсчет объектов: 3, готово.
-Delta compression using up to 8 threads.
-Сжатие объектов: 100% (3/3), готово.
-Запись объектов: 100% (3/3), 412 bytes | 412.00 KiB/s, готово.
-Total 3 (delta 0), reused 0 (delta 0)
-remote: 
-remote: Create a pull request for 'patch1' on GitHub by visiting:
-remote:      https://github.com/Alex-kku/Homework02/pull/new/patch1
-remote: 
-To https://github.com/Alex-kku/Homework02.git
- * [new branch]      patch1 -> patch1
-```
-4)
-5)
-6)
-```sh
-$  cat > hello_world.cpp <<EOF
-> #include <iosrteam> 
-> int main()
-> {
->     std::string name;
->     getline(cin, name);//enter the name
->     std::cout << "Hello world from " << name << std::endl;//print
->     return 0;
-> } 
-> EOF
- ```
-7)
- ```sh
- $ git commit -a -m "Add comments"
-[patch1 24da591] Add comments
- 1 file changed, 4 insertions(+), 4 deletions(-)
-$ git push origin patch1
-Username for 'https://github.com': Alex-kku
-Password for 'https://Alex-kku@github.com':************* 
-Подсчет объектов: 3, готово.
-Delta compression using up to 8 threads.
-Сжатие объектов: 100% (3/3), готово.
-Запись объектов: 100% (3/3), 415 bytes | 415.00 KiB/s, готово.
-Total 3 (delta 0), reused 0 (delta 0)
-To https://github.com/Alex-kku/Homework02.git
-   9b31eb6..24da591  patch1 -> patch1
-```
-8)
-9)
-10)
- ```sh
-$ git checkout master
-$ git merge patch1
-Обновление 209a510..24da591
-Fast-forward
- hello_world.cpp | 15 ++++++---------
- 1 file changed, 6 insertions(+), 9 deletions(-)
- ```
-11)
- ```sh
-$ git log
-commit 24da5911eb7db577c0075fcb989c0b9614d44ab5 (HEAD -> master, origin/patch1, patch1)
-Author: Alex-kku <leha.kushpelev@mai.ru>
-Date:   Tue Jun 2 22:34:34 2020 +0300
-
-    Add comments
-
-commit 9b31eb60bb637cac4068215ecffdb268311185be
-Author: Alex-kku <leha.kushpelev@mai.ru>
-Date:   Tue Jun 2 21:42:03 2020 +0300
-
-    Deletes using namespace std
-
-commit 209a5108ed1ce6353a5b105231499fd79d772885 (origin/master)
-Author: Alex-kku <leha.kushpelev@mai.ru>
-Date:   Tue Jun 2 20:58:18 2020 +0300
-
-    New hello_world.cpp
-
-commit feee75f3c404bb583265520a720e70d9c12cfee1
-Author: Alex-kku <leha.kushpelev@mai.ru>
-Date:   Tue Jun 2 20:51:04 2020 +0300
-
-    Aadded hello_world.cpp
-
-commit 30c4330d7e94924d9c6c2e22c99be336d3736a76
-Author: Alex-kku <leha.kushpelev@mai.ru>
-Date:   Tue Jun 2 20:45:24 2020 +0300
-
-    first commit
-```
-12)
- ```sh
-$ git branch -d patch1
-Ветка patch1 удалена (была 24da591).
- ```
-### Part III
-
-1)
-```sh
-$ git branch patch2
-$ git checkout patch2
-
-```
-2)
-```sh
-$ clang-format -style=Chromium -i hello_world.cpp
-```
-3)
-```sh
-$ git commit -a -m "New Style"
-[patch2 b6ef751] New Style-Chromium
- 1 file changed, 7 insertions(+), 8 deletions(-)
-$ git push origin patch2
-Username for 'https://github.com': Alex-kku
-Password for 'https://Alex-kku@github.com':*************
-Подсчет объектов: 3, готово.
-Delta compression using up to 8 threads.
-Сжатие объектов: 100% (3/3), готово.
-Запись объектов: 100% (3/3), 427 bytes | 427.00 KiB/s, готово.
-Total 3 (delta 0), reused 0 (delta 0)
-To https://github.com/Alex-kku/Homework02.git
-   24da591..b6ef751  patch2 -> patch2
-```
-4)
-5)
-6)
-```sh
-$ git checkout master
-$ git pull origin master
-Из https://github.com/Alex-kku/Homework02
- * branch            master     -> FETCH_HEAD
-Обновление e883769..aee1443
-Fast-forward
- hello_world.cpp | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
-$ git checkout patch2
-$ git rebase master
-Похоже, каталог rebase-apply уже существует и я предполагаю, что вы в процессе другого перемещения.  Если это так, попробуйте
-	git rebase (--continue | --abort | --skip)
-Если нет
-	rm -fr "/home/baha/Alex-kku/workspace/projects/homework02/.git/rebase-apply"
-и запустите меня снова.  Я останавливаюсь, чтобы вы не потеряли что-то важное.
-$ edit hello_world.cpp
-$ git add hello_world.cpp
-$ git commit -m "Fix conflicts"
-$ git rebase --continue
-$ git checkout master
-$ git merge patch2
-Автослияние hello_world.cpp
-Merge made by the 'recursive' strategy.
- hello_world.cpp | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-```
-7)
-```sh
-$ git push -f origin patch2
-```
-8)
-9)
+**Удачной стажировки!**
 
 ## Links
-
-- [hub](https://hub.github.com/)
-- [GitHub](https://github.com)
-- [Bitbucket](https://bitbucket.org)
-- [Gitlab](https://about.gitlab.com)
-- [LearnGitBranching](http://learngitbranching.js.org/)
+- [Основы сборки проектов на С/C++ при помощи CMake](https://eax.me/cmake/)
+- [CMake Tutorial](http://neerc.ifmo.ru/wiki/index.php?title=CMake_Tutorial)
+- [C++ Tutorial - make & CMake](https://www.bogotobogo.com/cplusplus/make.php)
+- [Autotools](http://www.gnu.org/software/automake/manual/html_node/Autotools-Introduction.html)
+- [CMake](https://cgold.readthedocs.io/en/latest/index.html)
 
 ```
 Copyright (c) 2015-2020 The ISC Authors
