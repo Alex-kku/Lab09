@@ -344,16 +344,6 @@ $ edit REPORT.md
 $ gist REPORT.md
 ```
 
-## Homework
-
-### Задание
-1. Создайте `CMakeList.txt` для библиотеки *banking*.
-2. Создайте модульные тесты на классы `Transaction` и `Account`.
-    * Используйте mock-объекты.
-    * Покрытие кода должно составлять 100%.
-3. Настройте сборочную процедуру на **TravisCI**.
-4. Настройте [Coveralls.io](https://coveralls.io/).
-
 ## Links
 
 - [C++ CI: Travis, CMake, GTest, Coveralls & Appveyor](http://david-grs.github.io/cpp-clang-travis-cmake-gtest-coveralls-appveyor/)
