@@ -20,7 +20,7 @@ $ open https://github.com/google/googletest
 ## Tutorial
 
 ```sh
-$ $ export GITHUB_USERNAME=Alex-kku
+$ export GITHUB_USERNAME=Alex-kku
 $ alias gsed=sed # for *-nix system
 ```
 
