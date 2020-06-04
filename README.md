@@ -1,6 +1,4 @@
-[![Build Status](https://travis-ci.org/Alex-kku/Lab06.svg?branch=master)](https://travis-ci.org/Alex-kku/Lab06)
-
-## Laboratory work VII
+[![Build Status](https://travis-ci.org/Alex-kku/Lab07.svg?branch=master)](https://travis-ci.org/Alex-kku/Lab07)
 
 <a href="https://yandex.ru/efir/?stream_id=vDHLoKtKoa3o"><img src="https://raw.githubusercontent.com/tp-labs/lab07/master/preview.png" width="640"/></a>
 
