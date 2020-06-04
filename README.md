@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/Alex-kku/Lab04.svg?branch=master)](https://travis-ci.com/Alex-kku/Lab04)
+[![Build Status](https://travis-ci.org/Alex-kku/Lab05.svg?branch=master)](https://travis-ci.org/Alex-kku/Lab05)
 
 ## Laboratory work IV
 
