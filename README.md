@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/Alex-kku/Lab05.svg?branch=master)](https://travis-ci.org/Alex-kku/Lab05)
+[![Build Status](https://travis-ci.org/Alex-kku/Lab06.svg?branch=master)](https://travis-ci.org/Alex-kku/Lab06)
 
 ## Laboratory work V
 
@@ -32,23 +32,23 @@ $ source scripts/activate
 ```
 
 ```sh
-$ git clone https://github.com/${GITHUB_USERNAME}/Lab04 projects/Lab05
-Клонирование в «projects/Lab05»…
+$ git clone https://github.com/${GITHUB_USERNAME}/Lab04 projects/Lab06
+Клонирование в «projects/Lab06»…
 remote: Enumerating objects: 161, done.
 remote: Counting objects: 100% (161/161), done.
 remote: Compressing objects: 100% (96/96), done.
 remote: Total 161 (delta 64), reused 154 (delta 61), pack-reused 0
 Получение объектов: 100% (161/161), 1.30 MiB | 1.13 MiB/s, готово.
 Определение изменений: 100% (64/64), готово.
-$ cd projects/Lab05
+$ cd projects/Lab06
 $ git remote remove origin
-$ git remote add origin https://github.com/${GITHUB_USERNAME}/Lab05
+$ git remote add origin https://github.com/${GITHUB_USERNAME}/Lab06
 ```
 
 ```sh
 $ mkdir third-party
 $ git submodule add https://github.com/google/googletest third-party/gtest
-Клонирование в «/home/baha/Alex-kku/workspace/projects/Lab05/third-party/gtest»…
+Клонирование в «/home/baha/Alex-kku/workspace/projects/Lab06/third-party/gtest»…
 remote: Enumerating objects: 16, done.
 remote: Counting objects: 100% (16/16), done.
 remote: Compressing objects: 100% (13/13), done.
@@ -146,7 +146,7 @@ $ cmake -H. -B_build -DBUILD_TESTS=ON
 -- Found Threads: TRUE  
 -- Configuring done
 -- Generating done
--- Build files have been written to: /home/baha/Alex-kku/workspace/projects/Lab05/_build
+-- Build files have been written to: /home/baha/Alex-kku/workspace/projects/Lab06/_build
 $ cmake --build _build
 Scanning dependencies of target gtest
 [  8%] Building CXX object third-party/gtest/googlemock/gtest/CMakeFiles/gtest.dir/src/gtest-all.cc.o
@@ -174,7 +174,7 @@ Scanning dependencies of target gmock_main
 [100%] Built target gmock_main
 $ cmake --build _build --target test
 Running tests...
-Test project /home/baha/Alex-kku/workspace/projects/Lab05/_build
+Test project /home/baha/Alex-kku/workspace/projects/Lab06/_build
     Start 1: check
 1/1 Test #1: check ............................   Passed    0.00 sec
 
@@ -185,7 +185,7 @@ Total Test time (real) =   0.01 sec
 
 ```sh
 $ _build/check
-Running main() from /home/baha/Alex-kku/workspace/projects/Lab05/third-party/gtest/googletest/src/gtest_main.cc
+Running main() from /home/baha/Alex-kku/workspace/projects/Lab06/third-party/gtest/googletest/src/gtest_main.cc
 [==========] Running 1 test from 1 test case.
 [----------] Global test environment set-up.
 [----------] 1 test from Print
@@ -198,9 +198,9 @@ Running main() from /home/baha/Alex-kku/workspace/projects/Lab05/third-party/gte
 [  PASSED  ] 1 test.
 $ cmake --build _build --target test -- ARGS=--verbose
 Running tests...
-UpdateCTestConfiguration  from :/home/baha/Alex-kku/workspace/projects/Lab05/_build/DartConfiguration.tcl
-UpdateCTestConfiguration  from :/home/baha/Alex-kku/workspace/projects/Lab05/_build/DartConfiguration.tcl
-Test project /home/baha/Alex-kku/workspace/projects/Lab05/_build
+UpdateCTestConfiguration  from :/home/baha/Alex-kku/workspace/projects/Lab06/_build/DartConfiguration.tcl
+UpdateCTestConfiguration  from :/home/baha/Alex-kku/workspace/projects/Lab06/_build/DartConfiguration.tcl
+Test project /home/baha/Alex-kku/workspace/projects/Lab06/_build
 Constructing a list of tests
 Done constructing a list of tests
 Updating test list for fixtures
@@ -210,9 +210,9 @@ Checking test dependency graph end
 test 1
     Start 1: check
 
-1: Test command: /home/baha/Alex-kku/workspace/projects/Lab05/_build/check
+1: Test command: /home/baha/Alex-kku/workspace/projects/Lab06/_build/check
 1: Test timeout computed to be: 9.99988e+06
-1: Running main() from /home/baha/Alex-kku/workspace/projects/Lab05/third-party/gtest/googletest/src/gtest_main.cc
+1: Running main() from /home/baha/Alex-kku/workspace/projects/Lab06/third-party/gtest/googletest/src/gtest_main.cc
 1: [==========] Running 1 test from 1 test case.
 1: [----------] Global test environment set-up.
 1: [----------] 1 test from Print
@@ -313,7 +313,7 @@ Delta compression using up to 8 threads.
 Запись объектов: 100% (172/172), 1.30 MiB | 408.00 KiB/s, готово.
 Total 172 (delta 69), reused 158 (delta 64)
 remote: Resolving deltas: 100% (69/69), done.
-To https://github.com/Alex-kku/Lab05
+To https://github.com/Alex-kku/Lab06
  * [new branch]      master -> master
 ```
 
@@ -321,8 +321,8 @@ To https://github.com/Alex-kku/Lab05
 $ travis login --auto
 Successfully logged in as Alex-kku!
 $ travis enable
-Detected repository as Alex-kku/Lab05, is this correct? |yes| y
-Alex-kku/Lab05: enabled :)
+Detected repository as Alex-kku/Lab06, is this correct? |yes| y
+Alex-kku/Lab06: enabled :)
 ```
 
 ```sh
