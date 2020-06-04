@@ -1,18 +1,18 @@
 [![Build Status](https://travis-ci.org/Alex-kku/Lab06.svg?branch=master)](https://travis-ci.org/Alex-kku/Lab06)
 
-## Laboratory work V
+## Laboratory work VI
 
-<a href="https://yandex.ru/efir/?stream_id=vQw_LH0UfN6I"><img src="https://raw.githubusercontent.com/tp-labs/lab05/master/preview.png" width="640"/></a>
+<a href="https://yandex.ru/efir/?stream_id=vGWlFO3of-Rg"><img src="https://raw.githubusercontent.com/tp-labs/lab06/master/preview.png" width="640"/></a>
 
-Данная лабораторная работа посвещена изучению фреймворков для тестирования на примере **GTest**
+Данная лабораторная работа посвещена изучению средств пакетирования на примере **CPack**
 
 ```sh
-$ open https://github.com/google/googletest
+$ open https://cmake.org/Wiki/CMake:CPackPackageGenerators
 ```
 
 ## Tasks
 
-- [x] 1. Создать публичный репозиторий с названием **lab05** на сервисе **GitHub**
+- [x] 1. Создать публичный репозиторий с названием **lab06** на сервисе **GitHub**
 - [x] 2. Выполнить инструкцию учебного материала
 - [x] 3. Ознакомиться со ссылками учебного материала
 - [x] 4. Составить отчет и отправить ссылку личным сообщением в **Slack**
@@ -20,8 +20,10 @@ $ open https://github.com/google/googletest
 ## Tutorial
 
 ```sh
-$ export GITHUB_USERNAME=Alex-kku
-$ alias gsed=sed # for *-nix system
+$ export GITHUB_USERNAME =Alex-kku
+$ export GITHUB_EMAIL=leha.kushpelev@mail.ru
+$ alias edit=vim
+$ alias gsed=sed
 ```
 
 ```sh
@@ -32,96 +34,162 @@ $ source scripts/activate
 ```
 
 ```sh
-$ git clone https://github.com/${GITHUB_USERNAME}/Lab04 projects/Lab06
+$ git clone https://github.com/${GITHUB_USERNAME}/Lab05 projects/Lab06
 Клонирование в «projects/Lab06»…
-remote: Enumerating objects: 161, done.
-remote: Counting objects: 100% (161/161), done.
-remote: Compressing objects: 100% (96/96), done.
-remote: Total 161 (delta 64), reused 154 (delta 61), pack-reused 0
-Получение объектов: 100% (161/161), 1.30 MiB | 1.13 MiB/s, готово.
-Определение изменений: 100% (64/64), готово.
+remote: Enumerating objects: 188, done.
+remote: Counting objects: 100% (188/188), done.
+remote: Compressing objects: 100% (112/112), done.
+remote: Total 188 (delta 77), reused 171 (delta 69), pack-reused 0
+Получение объектов: 100% (188/188), 1.74 MiB | 425.00 KiB/s, готово.
+Определение изменений: 100% (77/77), готово.
 $ cd projects/Lab06
 $ git remote remove origin
 $ git remote add origin https://github.com/${GITHUB_USERNAME}/Lab06
 ```
 
 ```sh
-$ mkdir third-party
-$ git submodule add https://github.com/google/googletest third-party/gtest
-Клонирование в «/home/baha/Alex-kku/workspace/projects/Lab06/third-party/gtest»…
-remote: Enumerating objects: 16, done.
-remote: Counting objects: 100% (16/16), done.
-remote: Compressing objects: 100% (13/13), done.
-remote: Total 20450 (delta 6), reused 9 (delta 3), pack-reused 20434
-Получение объектов: 100% (20450/20450), 7.59 MiB | 712.00 KiB/s, готово.
-Определение изменений: 100% (15112/15112), готово.
-$  cd third-party/gtest && git checkout release-1.8.1 && cd ../..
-Примечание: переход на «release-1.8.1».
-
-Вы сейчас в состоянии «отделённого HEAD». Вы можете осмотреться, сделать
-экспериментальные изменения и закоммитить их, также вы можете отменить
-изменения любых коммитов в этом состоянии не затрагивая любые ветки и
-не переходя на них.
-
-Если вы хотите создать новую ветку и сохранить свои коммиты, то вы
-можете сделать это (сейчас или позже) вызвав команду checkout снова,
-но с параметром -b. Например:
-
-  git checkout -b <имя-новой-ветки>
-
-HEAD сейчас на 2fe3bd99 Merge pull request #1433 from dsacre/fix-clang-warnings
-$ git add third-party/gtest
-$ git commit -m"added gtest framework"
-[master 54dbf7d] added gtest framework
- 2 files changed, 4 insertions(+)
- create mode 100644 .gitmodules
- create mode 160000 third-party/gtest
-```
-
-```sh
-$ gsed -i '/option(BUILD_EXAMPLES "Build examples" OFF)/a\
-> option(BUILD_TESTS "Build tests" OFF)
+$ gsed -i '/project(print)/a\
+> set(PRINT_VERSION_STRING "v\${PRINT_VERSION}")
 > ' CMakeLists.txt
+$ gsed -i '/project(print)/a\
+> set(PRINT_VERSION\
+>   \${PRINT_VERSION_MAJOR}.\${PRINT_VERSION_MINOR}.\${PRINT_VERSION_PATCH}.\${PRINT_VERSION_TWEAK})
+> ' CMakeLists.txt
+$ gsed -i '/project(print)/a\
+> set(PRINT_VERSION_TWEAK 0)
+> ' CMakeLists.txt
+$ gsed -i '/project(print)/a\
+> set(PRINT_VERSION_PATCH 0)
+> ' CMakeLists.txt
+$ gsed -i '/project(print)/a\
+> set(PRINT_VERSION_MINOR 1)
+> ' CMakeLists.txt
+$ gsed -i '/project(print)/a\
+> set(PRINT_VERSION_MAJOR 0)
+> ' CMakeLists.txt
+$ git diff
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index aa7a323..71b64e3 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -7,6 +7,13 @@ option(BUILD_EXAMPLES "Build examples" OFF)
+ option(BUILD_TESTS "Build tests" OFF)
+ 
+ project(print)
++set(PRINT_VERSION_MAJOR 0)
++set(PRINT_VERSION_MINOR 1)
++set(PRINT_VERSION_PATCH 0)
++set(PRINT_VERSION_TWEAK 0)
++set(PRINT_VERSION
++  ${PRINT_VERSION_MAJOR}.${PRINT_VERSION_MINOR}.${PRINT_VERSION_PATCH}.${PRINT_VERSION_TWEAK})
++set(PRINT_VERSION_STRING "v${PRINT_VERSION}")
+ 
+ add_library(print STATIC ${CMAKE_CURRENT_SOURCE_DIR}/sources/print.cpp)
+```
+
+```sh
+$ touch DESCRIPTION && edit DESCRIPTION
+$ touch ChangeLog.md
+$ export DATE="`LANG=en_US date +'%a %b %d %Y'`"
+$ cat > ChangeLog.md <<EOF
+> * ${DATE} ${GITHUB_USERNAME} <${GITHUB_EMAIL}> 0.1.0.0
+> - Initial RPM release
+> EOF
+```
+
+```sh
+$ cat > CPackConfig.cmake <<EOF
+> include(InstallRequiredSystemLibraries)
+> EOF
+```
+
+```sh
+$ cat >> CPackConfig.cmake <<EOF
+> set(CPACK_PACKAGE_CONTACT ${GITHUB_EMAIL})
+> set(CPACK_PACKAGE_VERSION_MAJOR \${PRINT_VERSION_MAJOR})
+> set(CPACK_PACKAGE_VERSION_MINOR \${PRINT_VERSION_MINOR})
+> set(CPACK_PACKAGE_VERSION_PATCH \${PRINT_VERSION_PATCH})
+> set(CPACK_PACKAGE_VERSION_TWEAK \${PRINT_VERSION_TWEAK})
+> set(CPACK_PACKAGE_VERSION \${PRINT_VERSION})
+> set(CPACK_PACKAGE_DESCRIPTION_FILE \${CMAKE_CURRENT_SOURCE_DIR}/DESCRIPTION)
+> set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "static C++ library for printing")
+> EOF
+```
+
+```sh
+$ cat >> CPackConfig.cmake <<EOF
+> set(CPACK_RESOURCE_FILE_LICENSE \${CMAKE_CURRENT_SOURCE_DIR}/LICENSE)
+> set(CPACK_RESOURCE_FILE_README \${CMAKE_CURRENT_SOURCE_DIR}/README.md)
+> EOF
+```
+
+```sh
+$ cat >> CPackConfig.cmake <<EOF
+> set(CPACK_RPM_PACKAGE_NAME "print-devel")
+> set(CPACK_RPM_PACKAGE_LICENSE "MIT")
+> set(CPACK_RPM_PACKAGE_GROUP "print")
+> set(CPACK_RPM_CHANGELOG_FILE \${CMAKE_CURRENT_SOURCE_DIR}/ChangeLog.md)
+> set(CPACK_RPM_PACKAGE_RELEASE 1)
+> EOF
+```
+
+```sh
+$ cat >> CPackConfig.cmake <<EOF
+> set(CPACK_DEBIAN_PACKAGE_NAME "libprint-dev")
+> set(CPACK_DEBIAN_PACKAGE_PREDEPENDS "cmake >= 3.0")
+> set(CPACK_DEBIAN_PACKAGE_RELEASE 1)
+> EOF
+```
+
+```sh
+$ cat >> CPackConfig.cmake <<EOF
+> include(CPack)
+> EOF
+```
+
+```sh
 $ cat >> CMakeLists.txt <<EOF
-> 
-> if(BUILD_TESTS)
->   enable_testing()
->   add_subdirectory(third-party/gtest)
->   file(GLOB \${PROJECT_NAME}_TEST_SOURCES tests/*.cpp)
->   add_executable(check \${\${PROJECT_NAME}_TEST_SOURCES})
->   target_link_libraries(check \${PROJECT_NAME} gtest_main)
->   add_test(NAME check COMMAND check)
-> endif()
+> include(CPackConfig.cmake)
 > EOF
 ```
 
 ```sh
-$ mkdir tests
-$ cat > tests/test1.cpp <<EOF
-> #include <print.hpp>
-> 
-> #include <gtest/gtest.h>
-> 
-> TEST(Print, InFileStream)
-> {
->   std::string filepath = "file.txt";
->   std::string text = "hello";
->   std::ofstream out{filepath};
-> 
->   print(text, out);
->   out.close();
-> 
->   std::string result;
->   std::ifstream in{filepath};
->   in >> result;
-> 
->   EXPECT_EQ(result, text);
-> }
-> EOF
+$ gsed -i 's/lab05/lab06/g' README.md
 ```
 
 ```sh
-$ cmake -H. -B_build -DBUILD_TESTS=ON
+$ git add .
+$ git commit -m"added cpack config"
+[master fcdb8e2] added cpack config
+ 5 files changed, 52 insertions(+), 17 deletions(-)
+ create mode 100644 CPackConfig.cmake
+ create mode 100644 ChangeLog.md
+ create mode 100644 DESCRIPTION
+$ git tag v0.1.0.0
+$ git push origin master --tags
+Username for 'https://github.com': Alex-kku
+Password for 'https://Alex-kku@github.com':*************
+Подсчет объектов: 195, готово.
+Delta compression using up to 8 threads.
+Сжатие объектов: 100% (110/110), готово.
+Запись объектов: 100% (195/195), 1.74 MiB | 1.35 MiB/s, готово.
+Total 195 (delta 80), reused 186 (delta 77)
+remote: Resolving deltas: 100% (80/80), done.
+To https://github.com/Alex-kku/Lab06
+ * [new branch]      master -> master
+ * [new tag]         v0.1.0.0 -> v0.1.0.0
+```
+
+```sh
+$ travis login --auto
+Successfully logged in as Alex-kku!
+$ travis enable
+Detected repository as Alex-kku/Lab06, is this correct? |yes| y
+Alex-kku/Lab06: enabled :)
+```
+
+```sh
+$ cmake -H. -B_build
 -- The C compiler identification is GNU 7.5.0
 -- The CXX compiler identification is GNU 7.5.0
 -- Check for working C compiler: /usr/bin/cc
@@ -136,206 +204,56 @@ $ cmake -H. -B_build -DBUILD_TESTS=ON
 -- Detecting CXX compiler ABI info - done
 -- Detecting CXX compile features
 -- Detecting CXX compile features - done
--- Found PythonInterp: /usr/bin/python (found version "2.7.17") 
--- Looking for pthread.h
--- Looking for pthread.h - found
--- Looking for pthread_create
--- Looking for pthread_create - not found
--- Check if compiler accepts -pthread
--- Check if compiler accepts -pthread - yes
--- Found Threads: TRUE  
 -- Configuring done
 -- Generating done
 -- Build files have been written to: /home/baha/Alex-kku/workspace/projects/Lab06/_build
 $ cmake --build _build
-Scanning dependencies of target gtest
-[  8%] Building CXX object third-party/gtest/googlemock/gtest/CMakeFiles/gtest.dir/src/gtest-all.cc.o
-[ 16%] Linking CXX static library libgtest.a
-[ 16%] Built target gtest
-Scanning dependencies of target gtest_main
-[ 25%] Building CXX object third-party/gtest/googlemock/gtest/CMakeFiles/gtest_main.dir/src/gtest_main.cc.o
-[ 33%] Linking CXX static library libgtest_main.a
-[ 33%] Built target gtest_main
 Scanning dependencies of target print
-[ 41%] Building CXX object CMakeFiles/print.dir/sources/print.cpp.o
-[ 50%] Linking CXX static library libprint.a
-[ 50%] Built target print
-Scanning dependencies of target check
-[ 58%] Building CXX object CMakeFiles/check.dir/tests/test1.cpp.o
-[ 66%] Linking CXX executable check
-[ 66%] Built target check
-Scanning dependencies of target gmock
-[ 75%] Building CXX object third-party/gtest/googlemock/CMakeFiles/gmock.dir/src/gmock-all.cc.o
-[ 83%] Linking CXX static library libgmock.a
-[ 83%] Built target gmock
-Scanning dependencies of target gmock_main
-[ 91%] Building CXX object third-party/gtest/googlemock/CMakeFiles/gmock_main.dir/src/gmock_main.cc.o
-[100%] Linking CXX static library libgmock_main.a
-[100%] Built target gmock_main
-$ cmake --build _build --target test
-Running tests...
-Test project /home/baha/Alex-kku/workspace/projects/Lab06/_build
-    Start 1: check
-1/1 Test #1: check ............................   Passed    0.00 sec
-
-100% tests passed, 0 tests failed out of 1
-
-Total Test time (real) =   0.01 sec
+[ 50%] Building CXX object CMakeFiles/print.dir/sources/print.cpp.o
+[100%] Linking CXX static library libprint.a
+[100%] Built target print
+$ cd _build
+$ cpack -G "TGZ"
+CPack: Create package using TGZ
+CPack: Install projects
+CPack: - Run preinstall target for: print
+CPack: - Install project: print
+CPack: Create package
+CPack: - package: /home/baha/Alex-kku/workspace/projects/Lab06/_build/print-0.1.0.0-Linux.tar.gz generated.
+$ cd ..
 ```
 
 ```sh
-$ _build/check
-Running main() from /home/baha/Alex-kku/workspace/projects/Lab06/third-party/gtest/googletest/src/gtest_main.cc
-[==========] Running 1 test from 1 test case.
-[----------] Global test environment set-up.
-[----------] 1 test from Print
-[ RUN      ] Print.InFileStream
-[       OK ] Print.InFileStream (0 ms)
-[----------] 1 test from Print (0 ms total)
-
-[----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
-[  PASSED  ] 1 test.
-$ cmake --build _build --target test -- ARGS=--verbose
-Running tests...
-UpdateCTestConfiguration  from :/home/baha/Alex-kku/workspace/projects/Lab06/_build/DartConfiguration.tcl
-UpdateCTestConfiguration  from :/home/baha/Alex-kku/workspace/projects/Lab06/_build/DartConfiguration.tcl
-Test project /home/baha/Alex-kku/workspace/projects/Lab06/_build
-Constructing a list of tests
-Done constructing a list of tests
-Updating test list for fixtures
-Added 0 tests to meet fixture requirements
-Checking test dependency graph...
-Checking test dependency graph end
-test 1
-    Start 1: check
-
-1: Test command: /home/baha/Alex-kku/workspace/projects/Lab06/_build/check
-1: Test timeout computed to be: 9.99988e+06
-1: Running main() from /home/baha/Alex-kku/workspace/projects/Lab06/third-party/gtest/googletest/src/gtest_main.cc
-1: [==========] Running 1 test from 1 test case.
-1: [----------] Global test environment set-up.
-1: [----------] 1 test from Print
-1: [ RUN      ] Print.InFileStream
-1: [       OK ] Print.InFileStream (0 ms)
-1: [----------] 1 test from Print (0 ms total)
-1: 
-1: [----------] Global test environment tear-down
-1: [==========] 1 test from 1 test case ran. (0 ms total)
-1: [  PASSED  ] 1 test.
-1/1 Test #1: check ............................   Passed    0.00 sec
-
-100% tests passed, 0 tests failed out of 1
-
-Total Test time (real) =   0.00 sec
+$ cmake -H. -B_build -DCPACK_GENERATOR="TGZ"
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/baha/Alex-kku/workspace/projects/Lab06/_build
+$ cmake --build _build --target package
+[100%] Built target print
+Run CPack packaging tool...
+CPack: Create package using TGZ
+CPack: Install projects
+CPack: - Run preinstall target for: print
+CPack: - Install project: print
+CPack: Create package
+CPack: - package: /home/baha/Alex-kku/workspace/projects/Lab06/_build/print-0.1.0.0-Linux.tar.gz generated.
 ```
 
 ```sh
-$ gsed -i 's/lab04/lab05/g' README.md
-$ gsed -i 's/\(DCMAKE_INSTALL_PREFIX=_install\)/\1 -DBUILD_TESTS=ON/' .travis.yml
-$ gsed -i '/cmake --build _build --target install/a\
-> - cmake --build _build --target test -- ARGS=--verbose
-> ' .travis.yml
-```
+$ mv _build/*.tar.gz artifacts
+$ tree artifacts
+artifacts
+├── print-0.1.0.0-Linux.tar.gz
+└── screenshot.png
 
-```sh
-$ travis lint
-Hooray, .travis.yml looks valid :)
-```
-
-```sh
-$ git add .travis.yml
-$ git add tests
-$ git add -p
-diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 96a361e..aa7a323 100644
---- a/CMakeLists.txt
-+++ b/CMakeLists.txt
-@@ -4,6 +4,7 @@ set(CMAKE_CXX_STANDARD 11)
- set(CMAKE_CXX_STANDARD_REQUIRED ON)
- 
- option(BUILD_EXAMPLES "Build examples" OFF)
-+option(BUILD_TESTS "Build tests" OFF)
- 
- project(print)
- 
-Stage this hunk [y,n,q,a,d,j,J,g,/,e,?]? y
-@@ -34,3 +35,12 @@ install(TARGETS print
- 
- install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/ DESTINATION include)
- install(EXPORT print-config DESTINATION cmake)
-+
-+if(BUILD_TESTS)
-+  enable_testing()
-+  add_subdirectory(third-party/gtest)
-+  file(GLOB ${PROJECT_NAME}_TEST_SOURCES tests/*.cpp)
-+  add_executable(check ${${PROJECT_NAME}_TEST_SOURCES})
-+  target_link_libraries(check ${PROJECT_NAME} gtest_main)
-+  add_test(NAME check COMMAND check)
-+endif()
-Stage this hunk [y,n,q,a,d,K,g,/,e,?]? y
-
-diff --git a/README.md b/README.md
-index 053f5cd..467036e 100644
---- a/README.md
-+++ b/README.md
-@@ -2,7 +2,7 @@
- 
- ## Laboratory work IV
- 
--<a href="https://yandex.ru/efir/?stream_id=vCgeA9EiySzw"><img src="https://raw.githubusercontent.com/tp-labs/lab04/master/preview.png" width="640"/></a>
-+<a href="https://yandex.ru/efir/?stream_id=vCgeA9EiySzw"><img src="https://raw.githubusercontent.com/tp-labs/lab05/master/preview.png" width="640"/></a>
- 
- Данная лабораторная работа посвещена изучению систем непрерывной интеграции на примере сервиса **Travis CI**
- 
-Stage this hunk [y,n,q,a,d,j,J,g,/,e,?]? y
-@@ -13,7 +13,7 @@ $ open https://travis-ci.org
- ## Tasks
- 
- - [x] 1. Авторизоваться на сервисе **Travis CI** с использованием **GitHub** аккаунта
--- [x] 2. Создать публичный репозиторий с названием **lab04** на сервисе **GitHub**
-+- [x] 2. Создать публичный репозиторий с названием **lab05** на сервисе **GitHub**
- - [x] 3. Ознакомиться со ссылками учебного материала
- - [x] 4. Включить интеграцию сервиса **Travis CI** с созданным репозиторием
- - [x] 5. Получить токен для **Travis CLI** с правами **repo** и **user**
-Stage this hunk [y,n,q,a,d,K,g,/,e,?]? y
-
-$ git commit -m"added tests"
-[master b32b89d] added tests
- 4 files changed, 33 insertions(+), 3 deletions(-)
- create mode 100644 tests/test1.cpp
-$ git push origin master
-Username for 'https://github.com': Alex-kku
-Password for 'https://Alex-kku@github.com':*************
-Подсчет объектов: 172, готово.
-Delta compression using up to 8 threads.
-Сжатие объектов: 100% (102/102), готово.
-Запись объектов: 100% (172/172), 1.30 MiB | 408.00 KiB/s, готово.
-Total 172 (delta 69), reused 158 (delta 64)
-remote: Resolving deltas: 100% (69/69), done.
-To https://github.com/Alex-kku/Lab06
- * [new branch]      master -> master
-```
-
-```sh
-$ travis login --auto
-Successfully logged in as Alex-kku!
-$ travis enable
-Detected repository as Alex-kku/Lab06, is this correct? |yes| y
-Alex-kku/Lab06: enabled :)
-```
-
-```sh
-$ mkdir artifacts
-$ sleep 20s && gnome-screenshot --file artifacts/screenshot.png
-# open https://github.com/${GITHUB_USERNAME}/lab05
+0 directories, 2 files
 ```
 
 ## Report
 
 ```sh
 $ popd
-$ export LAB_NUMBER=05
+$ export LAB_NUMBER=06
 $ git clone https://github.com/tp-labs/lab${LAB_NUMBER} tasks/lab${LAB_NUMBER}
 $ mkdir reports/lab${LAB_NUMBER}
 $ cp tasks/lab${LAB_NUMBER}/README.md reports/lab${LAB_NUMBER}/REPORT.md
@@ -346,9 +264,10 @@ $ gist REPORT.md
 
 ## Links
 
-- [C++ CI: Travis, CMake, GTest, Coveralls & Appveyor](http://david-grs.github.io/cpp-clang-travis-cmake-gtest-coveralls-appveyor/)
-- [Boost.Tests](http://www.boost.org/doc/libs/1_63_0/libs/test/doc/html/)
-- [Catch](https://github.com/catchorg/Catch2)
+- [DMG](https://cmake.org/cmake/help/latest/module/CPackDMG.html)
+- [DEB](https://cmake.org/cmake/help/latest/module/CPackDeb.html)
+- [RPM](https://cmake.org/cmake/help/latest/module/CPackRPM.html)
+- [NSIS](https://cmake.org/cmake/help/latest/module/CPackNSIS.html)
 
 ```
 Copyright (c) 2015-2020 The ISC Authors
