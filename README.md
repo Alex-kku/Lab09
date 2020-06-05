@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/Alex-kku/Lab09.svg?branch=master)](https://travis-ci.org/Alex-kku/Lab09)
 ## Laboratory work IX
 
 <a href="https://yandex.ru/efir/?stream_id=vYrKRcFKi46o"><img src="https://raw.githubusercontent.com/tp-labs/lab09/master/preview.png" width="640"/></a>
@@ -282,6 +283,25 @@ print-0.1.0.0-Darwin/include/print.hpp
 print-0.1.0.0-Darwin/lib/
 print-0.1.0.0-Darwin/lib/libprint.a
 $ tar -ztf ${PACKAGE_FILENAME}
+```
+
+```sh
+$ git add .
+$ git commit -m"Lab09 done"
+[master 9290024] Lab09 done
+ 1 file changed, 311 insertions(+), 256 deletions(-)
+ rewrite README.md (80%)
+$ git push origin master
+Username for 'https://github.com': Alex-kku
+Password for 'https://Alex-kku@github.com':*************
+Подсчет объектов: 237, готово.
+Delta compression using up to 8 threads.
+Сжатие объектов: 100% (131/131), готово.
+Запись объектов: 100% (237/237), 1.76 MiB | 404.00 KiB/s, готово.
+Total 237 (delta 94), reused 233 (delta 93)
+remote: Resolving deltas: 100% (94/94), done.
+To https://github.com/Alex-kku/Lab09
+ * [new branch]      master -> master
 ```
 
 ## Report
