@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/Alex-kku/Lab07.svg?branch=master)](https://travis-ci.org/Alex-kku/Lab07)
+[![Build Status](https://travis-ci.org/Alex-kku/Lab08.svg?branch=master)](https://travis-ci.org/Alex-kku/Lab08)
 
 <a href="https://yandex.ru/efir/?stream_id=vDHLoKtKoa3o"><img src="https://raw.githubusercontent.com/tp-labs/lab07/master/preview.png" width="640"/></a>
 
@@ -30,17 +30,17 @@ $ source scripts/activate
 ```
 
 ```sh
-$ git clone https://github.com/${GITHUB_USERNAME}/Lab06 projects/Lab07
-Клонирование в «projects/Lab07»…
+$ git clone https://github.com/${GITHUB_USERNAME}/Lab06 projects/Lab08
+Клонирование в «projects/Lab08»…
 remote: Enumerating objects: 202, done.
 remote: Counting objects: 100% (202/202), done.
 remote: Compressing objects: 100% (113/113), done.
 remote: Total 202 (delta 82), reused 198 (delta 81), pack-reused 0
 Получение объектов: 100% (202/202), 1.74 MiB | 880.00 KiB/s, готово.
 Определение изменений: 100% (82/82), готово.
-$ cd projects/Lab07
+$ cd projects/Lab08
 $ git remote remove origin
-$ git remote add origin https://github.com/${GITHUB_USERNAME}/Lab07
+$ git remote add origin https://github.com/${GITHUB_USERNAME}/Lab08
 ```
 
 ```sh
@@ -111,7 +111,7 @@ $ cmake -H. -B_builds -DBUILD_TESTS=ON
 -- Found Threads: TRUE  
 -- Configuring done
 -- Generating done
--- Build files have been written to: /home/baha/Alex-kku/workspace/projects/Lab07/_builds
+-- Build files have been written to: /home/baha/Alex-kku/workspace/projects/Lab08/_builds
 $ cmake --build _builds
 Scanning dependencies of target print
 [ 25%] Building CXX object CMakeFiles/print.dir/sources/print.cpp.o
@@ -123,7 +123,7 @@ Scanning dependencies of target check
 [100%] Built target check
 $ cmake --build _builds --target test
 Running tests...
-Test project /home/baha/Alex-kku/workspace/projects/Lab07/_builds
+Test project /home/baha/Alex-kku/workspace/projects/Lab08/_builds
     Start 1: check
 1/1 Test #1: check ............................   Passed    0.00 sec
 
@@ -172,7 +172,7 @@ $ cmake -H. -B_builds -DBUILD_TESTS=ON
 -- Found Threads: TRUE  
 -- Configuring done
 -- Generating done
--- Build files have been written to: /home/baha/Alex-kku/workspace/projects/Lab07/_builds
+-- Build files have been written to: /home/baha/Alex-kku/workspace/projects/Lab08/_builds
 $ cmake --build _builds
 Scanning dependencies of target print
 [ 25%] Building CXX object CMakeFiles/print.dir/sources/print.cpp.o
@@ -184,7 +184,7 @@ Scanning dependencies of target check
 [100%] Built target check
 $ cmake --build _builds --target test
 Running tests...
-Test project /home/baha/Alex-kku/workspace/projects/Lab07/_builds
+Test project /home/baha/Alex-kku/workspace/projects/Lab08/_builds
     Start 1: check
 1/1 Test #1: check ............................   Passed    0.00 sec
 
@@ -254,7 +254,7 @@ $ gsed -i '/endif()/a\
 ```sh
 $ mkdir tools
 $ git submodule add https://github.com/ruslo/polly tools/polly
-Клонирование в «/home/baha/Alex-kku/workspace/projects/Lab07/tools/polly»…
+Клонирование в «/home/baha/Alex-kku/workspace/projects/Lab08/tools/polly»…
 remote: Enumerating objects: 29, done.
 remote: Counting objects: 100% (29/29), done.
 remote: Compressing objects: 100% (19/19), done.
@@ -263,14 +263,14 @@ remote: Total 6423 (delta 10), reused 24 (delta 10), pack-reused 6394
 Определение изменений: 100% (4418/4418), готово.
 $ tools/polly/bin/polly.py --test
 Python version: 3.6
-Build dir: /home/baha/Alex-kku/workspace/projects/Lab07/_builds/default
+Build dir: /home/baha/Alex-kku/workspace/projects/Lab08/_builds/default
 Execute command: [
   `which`
   `cmake`
 ]
 ....................................
 -
-Log saved: /home/baha/Alex-kku/workspace/projects/Lab07/_logs/polly/default/log.txt
+Log saved: /home/baha/Alex-kku/workspace/projects/Lab08/_logs/polly/default/log.txt
 -
 Generate: 0:00:04.078378s
 Build: 0:00:01.728307s
@@ -282,13 +282,13 @@ SUCCESS
 
 $ tools/polly/bin/polly.py --install
 Python version: 3.6
-Build dir: /home/baha/Alex-kku/workspace/projects/Lab07/_builds/default
+Build dir: /home/baha/Alex-kku/workspace/projects/Lab08/_builds/default
 Execute command: [
   `which`
   `cmake`
 ]
 
-[/home/baha/Alex-kku/workspace/projects/Lab07]> "which" "cmake"
+[/home/baha/Alex-kku/workspace/projects/Lab08]> "which" "cmake"
 
 /usr/bin/cmake
 Execute command: [
@@ -296,7 +296,7 @@ Execute command: [
   `--version`
 ]
 
-[/home/baha/Alex-kku/workspace/projects/Lab07]> "cmake" "--version"
+[/home/baha/Alex-kku/workspace/projects/Lab08]> "cmake" "--version"
 
 cmake version 3.10.2
 
@@ -308,13 +308,13 @@ Looks like cmake arguments changed. You have two options to fix it:
   * Remove build directory completely by adding '--clear' (works 100%)
   * Run configure again by adding '--reconfig' (you must understand how CMake cache variables works/updated)
 
-- "cmake" "-H." "-B/home/baha/Alex-kku/workspace/projects/Lab07/_builds/default" "-DCMAKE_TOOLCHAIN_FILE=/home/baha/Alex-kku/workspace/projects/Lab07/tools/polly/default.cmake"
-+ "cmake" "-H." "-B/home/baha/Alex-kku/workspace/projects/Lab07/_builds/default" "-DCMAKE_TOOLCHAIN_FILE=/home/baha/Alex-kku/workspace/projects/Lab07/tools/polly/default.cmake" "-DCMAKE_INSTALL_PREFIX=/home/baha/Alex-kku/workspace/projects/Lab07/_install/default"
+- "cmake" "-H." "-B/home/baha/Alex-kku/workspace/projects/Lab08/_builds/default" "-DCMAKE_TOOLCHAIN_FILE=/home/baha/Alex-kku/workspace/projects/Lab08/tools/polly/default.cmake"
++ "cmake" "-H." "-B/home/baha/Alex-kku/workspace/projects/Lab08/_builds/default" "-DCMAKE_TOOLCHAIN_FILE=/home/baha/Alex-kku/workspace/projects/Lab08/tools/polly/default.cmake" "-DCMAKE_INSTALL_PREFIX=/home/baha/Alex-kku/workspace/projects/Lab08/_install/default"
 ?                                                                                                                                                                               +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 $ tools/polly/bin/polly.py --toolchain clang-cxx14
 Python version: 3.6
-Build dir: /home/baha/Alex-kku/workspace/projects/Lab07/_builds/clang-cxx14
+Build dir: /home/baha/Alex-kku/workspace/projects/Lab08/_builds/clang-cxx14
 Execute command: [
   `which`
   `cmake`
@@ -329,7 +329,7 @@ Scanning dependencies of target demo
 [100%] Linking CXX executable demo
 [100%] Built target demo
 -
-Log saved: /home/baha/Alex-kku/workspace/projects/Lab07/_logs/polly/clang-cxx14/log.txt
+Log saved: /home/baha/Alex-kku/workspace/projects/Lab08/_logs/polly/clang-cxx14/log.txt
 -
 Generate: 0:00:05.691181s
 Build: 0:00:01.816189s
@@ -340,8 +340,8 @@ SUCCESS
 ```
 ```sh
 $ git add .
-$ git commit -m"Lab07 done"
-[master 1e23bf3] Lab07 done
+$ git commit -m"Lab08 done"
+[master 1e23bf3] Lab08 done
  11 files changed, 865 insertions(+), 6 deletions(-)
  create mode 100644 _logs/polly/clang-cxx14/log.txt
  create mode 100644 _logs/polly/default/log-0.txt
@@ -361,7 +361,7 @@ Delta compression using up to 8 threads.
 Запись объектов: 100% (220/220), 1.75 MiB | 1.76 MiB/s, готово.
 Total 220 (delta 87), reused 200 (delta 82)
 remote: Resolving deltas: 100% (87/87), done.
-To https://github.com/Alex-kku/Lab07
+To https://github.com/Alex-kku/Lab08
  * [new branch]      master -> master
 ```
 
